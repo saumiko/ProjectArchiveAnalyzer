@@ -194,4 +194,19 @@ public class ProjectGroupServiceImpl implements ProjectGroupService,Serializable
 		}
 		return projectGroupId;
 	}	
+	
+	@Override
+	public String findProjectTitleByGroupId(int groupId) {
+		String projectTitle=null;
+		List<ProjectGroup> projectGroupList = projectGroupDao.findAll();
+		if(projectGroupList!=null)
+		for(ProjectGroup pg : projectGroupList)
+		{
+			// this if statement filters the groups
+			if(pg.getGroupId().getGroupId() == groupId){
+				projectTitle = pg.getProjectId().getProjectTitle();
+			}
+		}
+		return projectTitle;
+	}	
 }

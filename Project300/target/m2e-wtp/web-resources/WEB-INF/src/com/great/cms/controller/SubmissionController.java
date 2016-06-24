@@ -54,13 +54,12 @@ public class SubmissionController {
 
 		submissionList = projGrpSubService
 				.findSubmissionListByProjectGroupId(groupId);
-
 		
 		jsonArray = new JSONArray();
 
 		if (submissionList == null)
 			System.out
-					.println("Submission Controller -> getSubmissionList : LIST IS NULL");
+					.println("Hellllo Submission Controller -> getSubmissionList : LIST IS NULL");
 
 		for (Submission s : submissionList) {
 			JSONArray jsonObj = new JSONArray();
@@ -89,6 +88,7 @@ public class SubmissionController {
 		String submissionJson = parameters.toJSONString();
 
 		return submissionJson;
+		//return "ProjectFileView";
 
 	}
 
@@ -190,7 +190,7 @@ public class SubmissionController {
 		System.out.println("File Name: "+request.getParameter("filename"));
 
 		try {
-			File file = new File("G:/Work/Upload Repo/"
+			File file = new File("F:/Work/Upload Repo/"
 					+ request.getParameter("filename") + ".zip");
 			
 			

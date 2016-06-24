@@ -94,15 +94,5 @@ public class LoginController {
 	
 	}
 	
-//	@RequestMapping(value = "/publicview")
-//	public String tester(
-//			Model model){
-//		
-//		List<Course> courses = (List<Course>) courseService.getCourseBySession(2010);
-//		for (Course c:courses)
-//			System.out.println(c);
-//		model.addAttribute("courses",courses);
-//		
-//		return "publicview";
-//	}
+
 }

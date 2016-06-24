@@ -77,14 +77,15 @@ public class CourseController {
 		parameters.put("recordsFiltered", 1);
 		parameters.put("data", jsonArray);
 		String taskJson = parameters.toJSONString();
-
+		System.out.println(taskJson);
 		System.out.println("going to teacher course page course");
 		return taskJson;
 	}
 	
 	
 	//initialization of public view
-	@RequestMapping(value = "/publicview")
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/publicview",method=RequestMethod.GET)
 	public String tester(@RequestParam(value="session",required=false) String rsession,
 			Model model,HttpSession courseSession){
 		System.out.println("INISDE");
@@ -92,7 +93,7 @@ public class CourseController {
 		if (rsession!=null)
 			session = Integer.parseInt(rsession);
 		else
-			session = 2010;
+			session = 2011;
 		courseSession.setAttribute("courseSession", session);
 		System.out.println(rsession);
 		List<Course> courses = (List<Course>) courseService.getCourseBySession(session);
@@ -101,7 +102,10 @@ public class CourseController {
 		model.addAttribute("courses",courses);
 		
 		return "publicview";
+				
 	}
+	
+	
 	
 	@RequestMapping(value="/courseTaskViewReq",method=RequestMethod.GET)
 	public String tester2(Model model,HttpSession session,@RequestParam("courseId") String strCourseId){

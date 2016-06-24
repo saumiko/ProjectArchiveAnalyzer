@@ -155,8 +155,15 @@ public class ProjectController {
 	
 	@RequestMapping(value="/projectGroupViewReq",method=RequestMethod.GET)
 	public String tester3(Model model,HttpSession session,@RequestParam(value="taskId",required=false) String strTaskId){
+		System.out.println("INside projectGroupViewReq");
 		int taskId = Integer.parseInt(strTaskId);
 		List<Groups> groups = taskGroupService.findGroupsByTaskID(taskId);
+		for (Groups grp : groups){
+			grp.setProjectTitle(projectGroupService.findProjectTitleByGroupId(grp.getGroupId()));
+		}
+		for (Groups grp : groups){
+			System.out.println(grp);
+		}
 		model.addAttribute("groups", groups);
 		model.addAttribute("taskId",taskId);
 		return "GroupView";
@@ -172,16 +179,19 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value="/projectFileView",method=RequestMethod.GET)
-	public String tester5(Model model,HttpSession session,@RequestParam(value="groupId") String strGroupId,@RequestParam(value="projectTitle") String projectTitle){
-		int groupId = Integer.parseInt(strGroupId);
+	public String tester5(Model model,HttpSession session,@RequestParam(value="groupId") int groupId,@RequestParam(value="projectTitle",required=false) String projectTitle,@RequestParam(value="groupName",required=false) String groupName){
+		//int groupId = Integer.parseInt(strGroupId);
 		//int projectGroupId = projectGroupService.findProjectGroupIdByGroupId(groupId);
+		System.out.println("Group Id is : "+groupId);;
 		List<Submission> submissions = null;
 		submissions = projectGroupSubmitService.findSubmissionListByProjectGroupId(groupId);
 		System.out.println("Hello"+groupId);
 		model.addAttribute("projectTitle",projectTitle);
 		model.addAttribute("submissions",submissions);
+		model.addAttribute("groupName",groupName);
 		for (Submission s:submissions)
 			System.out.println(s);
 		return "ProjectFileView";
 	}
+
 }

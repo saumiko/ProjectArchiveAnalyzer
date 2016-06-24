@@ -21,6 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -52,7 +53,9 @@ public class Groups implements Serializable,DomainObject{
     @JoinColumn(name = "task_id", referencedColumnName = "task_id")
     @ManyToOne(optional = false)
     private Task taskId;
-
+    @Transient
+    private String projectTitle;
+    
     public Groups() {
     }
 
@@ -105,6 +108,14 @@ public class Groups implements Serializable,DomainObject{
 
     public void setTaskId(Task taskId) {
         this.taskId = taskId;
+    }
+    
+    public void setProjectTitle(String projectTitle){
+    	this.projectTitle = projectTitle;
+    }
+    
+    public String getProjectTitle(){
+    	return projectTitle;
     }
 
     @Override
