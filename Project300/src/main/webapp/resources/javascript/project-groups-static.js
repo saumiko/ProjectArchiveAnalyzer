@@ -1,5 +1,6 @@
 var projectURL = "ajaxprojects";
-var groupURL = "ajaxgroups?project_id=0";
+//var groupURL = "ajaxgroups?project_id=1";
+var groupURL = "ajaxgroups";
 var addProjectURL = "addproject";
 var updateProjectURL = "updateproject";
 var deleteProjectURL = "deleteproject";
@@ -20,6 +21,8 @@ $(document)
 					var projectTable;
 					var groupTable;
 					
+					
+					$.fn.dataTable.ext.errMode = 'throw';
 					// Enable tooltips for registration ids in group table
 					$('[data-toggle="tooltip"]').tooltip();
 

@@ -66,7 +66,7 @@
 </div>
 </nav>
 <div class="container">
-	<input type="hidden" id="hidden_username" name="username" value=${username}></input>
+	<input type="hidden" id="hidden_username" name="username" value="${UserRole.getUserName()}"></input>
 	<div class="panel">
 		<table id="courseTable"
 			class="table table-striped table-bordered table-hover">

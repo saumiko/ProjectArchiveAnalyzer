@@ -135,16 +135,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${projectList}" var="projectList">
+					<c:forEach items="${projectList2}" var="projectList2">
 						<tr>
-							<td><c:out value="${projectList.getProjectId()}" /></td>
+							<td><c:out value="${projectList2.getProjectId()}" /></td>
 							<td><a
-								href="${pageContext.request.contextPath}/projectgroups?task_id=${task_id}&project_id=${projectList.getProjectId()}">
-									<c:out value="${projectList.getProjectTitle()}" />
+								href="${pageContext.request.contextPath}/projectgroups?task_id=${task_id}&project_id=${projectList2.getProjectId()}">
+									<c:out value="${projectList2.getProjectTitle()}" />
 							</a></td>
-							<td><c:out value="${projectList.getProjectDesc()}" /></td>
-							<td><a href="toUpdateProjectFormPage?task_id=${task_id}&projectId=${projectList.getProjectId()}&projectTitle=${projectList.getProjectTitle()}&projectDesc=${projectList.getProjectDesc()}" class="btn btn-info btn-sm editbutton"><i
-									class="glyphicon glyphicon-edit "></i></a> <a onclick="confirmDelete(${task_id},${projectList.getProjectId()})"
+							<td><c:out value="${projectList2.getProjectDesc()}" /></td>
+							<td><a href="toUpdateProjectFormPage?task_id=${task_id}&projectId=${projectList2.getProjectId()}&projectTitle=${projectList2.getProjectTitle()}&projectDesc=${projectList2.getProjectDesc()}" class="btn btn-info btn-sm editbutton"><i
+									class="glyphicon glyphicon-edit "></i></a> <a
 								class="btn btn-danger btn-sm removebutton"><i
 									class="glyphicon glyphicon-remove "></i></a></td>
 						</tr>
@@ -167,7 +167,7 @@
 						</button>
 					</c:when>
 					<c:otherwise>
-						<button id="button_add_project" class="btn btn-success" onclick="goToAddGroupFormPage(${task_id})">
+						<button id="button_add_project" class="btn btn-success">
 							<i class="glyphicon glyphicon-plus-sign"></i> Add Groups
 						</button>
 					</c:otherwise>
@@ -204,12 +204,12 @@
 					<c:forEach items="${groupList}" var="groupList">
 						<tr>
 							<td><c:out value="${groupList.getGroupId()}" /></td>
-							<td><a href="${pageContext.request.contextPath}/submissions?group_id=${groupList.getGroupId()}"> <c:out
+							<td><a href="${pageContext.request.contextPath}/#"> <c:out
 										value="${groupList.getGroupName()}" /></a></td>
 							<td><c:out value="${groupList.getMemberString()}" /></td>
-							<td><a class="btn btn-info btn-sm editbutton" onclick="goToUpdateGroupPage(${groupList.getGroupId()},${task_id})"><i
+							<td><a class="btn btn-info btn-sm editbutton"><i
 									class="glyphicon glyphicon-edit "></i></a> <a
-								class="btn btn-danger btn-sm removebutton" onclick="goDeleteGroup(${groupList.getGroupId()},${task_id})"><i
+								class="btn btn-danger btn-sm removebutton"><i
 									class="glyphicon glyphicon-remove "></i></a></td>
 						</tr>
 					</c:forEach>
@@ -453,27 +453,8 @@ $(document).ready(function(){
     $('#projectTable').DataTable();
     $('#groupTable').DataTable();
 });
-
-function confirmDelete(taskId,projectId){
-	var result = confirm("Want to delete?");
-	if (result) {
-	    window.location.href = "${pageContext.request.contextPath}/deleteproject?taskId="+taskId+"&projectId="+projectId;
-	}
-}
 function goToAddProjectForm(task_id){
 	window.location.href = "${pageContext.request.contextPath}/addproject2?task_id="+task_id;
-}
-function goToAddGroupFormPage(task_id){
-	alert("whoops!!!!");
-	window.location.href = "${pageContext.request.contextPath}/goToAddGroupFormPage?task_id="+task_id;
-}
-function goToUpdateGroupPage(groupId,taskId){
-	alert("whoops!!!!");
-	window.location.href = "${pageContext.request.contextPath}/gotoupdategroupformpage?groupId="+groupId+"&taskId="+taskId;
-}
-function goDeleteGroup(groupId,taskId){
-	alert("whoops!!!!");
-	window.location.href = "${pageContext.request.contextPath}/deletegroup?groupId="+groupId+"&taskId="+taskId;
 }
 </script>
 </html>

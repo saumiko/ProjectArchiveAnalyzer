@@ -338,7 +338,7 @@
 			</div>
 		</div>
 		<!-- Modal delete -->
-
+	<a href="${pageContext.request.contextPath}/courseback">Previous Page</a>
 	</div>
 	<!-- body container -->
 </body>

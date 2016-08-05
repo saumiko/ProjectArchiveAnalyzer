@@ -84,6 +84,8 @@
 		
 		</form>
 		
+		<a href="${pageContext.request.contextPath}/goToRegistration">Register</a>
+		
 	</div>
 	
 
