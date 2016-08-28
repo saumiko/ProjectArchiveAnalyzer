@@ -55,8 +55,8 @@ $(document).ready(
 					'tr',
 					function(e) {
 						var rowIndex = taskTable.row( this ).index();
-						var redirectWithParam = "projectstdgroups?task_id=" +taskTable.cell(rowIndex, 0).data();
-						
+						//var redirectWithParam = "projectstdgroups?task_id=" +taskTable.cell(rowIndex, 0).data();
+						var redirectWithParam = "ajaxprojects2?task_id=" +taskTable.cell(rowIndex, 0).data();
 						window.location.href = redirectWithParam;
 					});
 

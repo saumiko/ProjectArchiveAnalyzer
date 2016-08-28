@@ -86,6 +86,14 @@ $(document)
 														.data());
 								$("#view_submission_download").show()
 								}
+								//from here
+								$("#mtest").attr(
+										"href",
+										"verifysubmission?submissionId="
+												+ submissionTable.cell(this, 0)
+														.data());
+								$("#mtest").show()
+								//ends here
 								$('#modalSubmissionInfo').modal('show');
 							});
 
@@ -97,7 +105,8 @@ $(document)
 						$('#edit_submission_group_id').val(getUrlVars()["group_id"]);
 						$('#edit_submission_date').val("");
 						$("#edit_submission_comment").val("");
-						$('#edit_submission_date').val("06/01/2015 12:00:00");
+						//$('#edit_submission_date').val("06/01/2015 12:00:00");
+						$('#edit_submission_date').val("dd/mm/yyyy");
 						$('#modalSubmissionEdit').modal('show');
 					});
 

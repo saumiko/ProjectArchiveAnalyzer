@@ -7,6 +7,6 @@ import com.great.cms.db.entity.TaskProject;
 public interface TaskProjectDao extends GenericDao<TaskProject, Integer> {
 
 	List<TaskProject> getProjectsByTaskID(int taskId);
-	
+	public TaskProject findByProjectId(int projectId);
 	
 }

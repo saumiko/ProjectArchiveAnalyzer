@@ -107,10 +107,13 @@ public class TaskController {
 	
 	
 	@RequestMapping(value = "/edittask", method = RequestMethod.POST)
-	public @ResponseBody
+	//public @ResponseBody
+	public 
 	String updateTask(TaskBean taskBean, BindingResult result) {
+		System.out.println("Task DeadLine "+taskBean.getTaskDeadline());
 		taskService.updateTask(taskBean);
-		return "{ \"success\" : true }";
+		//return "{ \"success\" : true }";
+		return "tasks";
 
 	}
 	
@@ -126,7 +129,8 @@ public class TaskController {
 	@RequestMapping(value = "/deletetask", method = RequestMethod.POST)
 	public @ResponseBody
 	String deletetask(@RequestParam("taskId") int id) {
-
+		
+		System.out.println("inside deletetaskbyid");
 		taskService.deleteTaskById(id);
 		
 		return "{ \"success\" : true }";

@@ -90,9 +90,14 @@ public class TaskBean {
 	// TODO: Convert the string date from HTML to SQL date format
 	// Currently returns the system datetime of execution
 	public Date getTaskDeadlineToDate(){
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
-		System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = null;
+		try {
+			date = simpleDateFormat.parse(taskDeadline);
+			System.out.println(simpleDateFormat.format(date)); //2014/08/06 15:59:48
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return date;
 	}
 }

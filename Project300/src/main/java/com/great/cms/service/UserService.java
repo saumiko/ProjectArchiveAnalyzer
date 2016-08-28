@@ -8,7 +8,7 @@ public interface UserService {
 
 	public User getUserByID(Integer id);
 	public User getUserByName(String userName);
-	
+	public void saveUser(User user);
 	//this is done for practicing purposes
 	public List<User> getAllUser();
 

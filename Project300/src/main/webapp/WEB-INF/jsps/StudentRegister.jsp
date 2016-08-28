@@ -57,35 +57,38 @@
 	<h4>Register</h4>
 
      <div id="container">
+     
+     	<p> Your Username for Login is ${User.getUserName()} </p>
 		
-		<form action="checklogin" method="post">
+		<form action="submitStudentRegistrationForm" method="post">
 		
 		<label for="firstname">First Name:</label>
 		
-		<input type="name" id="firstname" name="firstname">
+		<input type="name" id="firstname" name="firstName">
 		
 		<label for="firstname">Last Name:</label>
 		
-		<input type="name" id="lastname" name="lastname">
+		<input type="name" id="lastname" name="lastName">
 		
 		<label for="reg">Registration Number:</label>
 		
-		<input type="name" id="reg" name="reg">
+		<input type="name" id="reg" name="registrationNo">
 		
-		<input type="hidden" name="dept" value="CSE">
-		<input type="hidden" name="contact" value="+8801*********">
-		<input type="hidden" name="address" value="Surma R/A">
-		<input type="hidden" name="mstatus" value="Single">
-		<input type="hidden" name="blood" value="A+">
-		<input type="hidden" name="religion" value="islam">
-		<input type="hidden" name="gender" value="male">
+		<input type="hidden" value="CSE" name="deptCode">
+		<input type="hidden" value="aaa" name="emailNo">
+		<input type="hidden" value="aaa" name="contactNo">
+		<input type="hidden" value="aaa" name="address">
+		<input type="hidden" value="aaa" name="maritalStatus">
+		<input type="hidden" value="aaa" name="bloodGroup">
+		<input type="hidden" value="aaa" name="religion">
+		<label for="dob">DOB</label>
+		<input type="date" id="dob" name="dateOfBirth">
+		<input type="hidden" value="aaa" name="gender">
 		
-		<label for="bday">Date of Birth:</label>
-		<input type="date" name = "bday">
+		
+		
 		
 		<div id="lower">
-		
-		
 		
 		<input type="submit" value="Continue">
 		

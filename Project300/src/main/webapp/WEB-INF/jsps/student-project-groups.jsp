@@ -3,6 +3,7 @@
 /*HTTP 1.1*/ response.setHeader("Pragma","no-cache"); 
 /*HTTP 1.0*/ response.setDateHeader ("Expires", 0);
 %> 
+<%@page import="com.great.cms.db.entity.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,9 +35,7 @@
 <script
 	src="<c:url value="/resources/javascript/dataTables.bootstrap.js" />"
 	type="text/javascript"></script>
-<script
-	src="<c:url value="/resources/studentjs/project-groups-static-student.js" />"
-	type="text/javascript"></script>
+
 
 </head>
 <body>
@@ -67,9 +66,7 @@
 	
 	<div class="row searchbar">
 	<div class="col-xs-8">
-				<p class="table-headertext">
-					Task: <span id="task_title">${task_title}</span>
-				</p>
+				
 				
 				
 			</div>
@@ -80,16 +77,17 @@
 		<div class="panel col-lg-6 col-sm-6">
 		
 		
-			
+			<% 
+		User user = (User) session.getAttribute("User");
+		if (user==null)
+			response.sendRedirect("Failure");
+	%>
 		
 			
 			<div class="row">
 			
 			<div class="col-xs-4 rowAddButton">
-				<button id="button_add_project"
-					class="btn btn-success"> 
-					 View All
-				</button>
+				
 			</div>
 			</div>
 			<table id="projectTable"
@@ -117,6 +115,13 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${projectList}" var="projectList">
+						<tr>
+							<td> <c:out value="${projectList.getProjectId()}"/>    </td>
+							<td> <c:out value="${projectList.getProjectTitle()}"/> </td>
+							<td> <c:out value="${projectList.getProjectDesc()}"/>  </td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -145,6 +150,15 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${groupList}" var="groupList">
+						<tr>
+							<td><c:out value="${groupList.getGroupId()}" /></td>
+							<td><a href="${pageContext.request.contextPath}/submissions?group_id=${groupList.getGroupId()}"> <c:out
+										value="${groupList.getGroupName()}" /></a></td>
+							<td><c:out value="${groupList.getMemberString()}" /></td>
+							
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -159,4 +173,10 @@
 </div>
 		<!-- body container -->
 </body>
+<script>
+$(document).ready(function(){
+    $('#projectTable').DataTable();
+    $('#groupTable').DataTable();
+});
+</script>
 </html>

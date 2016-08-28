@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@page import="com.great.cms.db.entity.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -34,8 +34,6 @@
 <script
 	src="<c:url value="/resources/javascript/dataTables.bootstrap.js" />"
 	type="text/javascript"></script>
-<script src="<c:url value="/resources/studentjs/stdcourse.js" />"
-	type="text/javascript"></script>
 
 </head>
 <body>
@@ -48,6 +46,11 @@
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
 		<a class="navbar-brand" href="/greatweb">SUST Archives<sup>beta</sup></a>
+		<% 
+		User user = (User) session.getAttribute("User");
+		if (user==null)
+			response.sendRedirect("Failure");
+	%>
 	</div>
 	<div
 		class="
@@ -55,6 +58,7 @@
                  col-xs-12">
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="#">${UserRole.getUserName()}</a></li>
+			<li><a href="${pageContext.request.contextPath}/takecourse?session=2011">Take A Course</a></li>
 			<li><a href="#">Settings</a></li>
 			<li><a href="sign-in.html">Log Out</a></li>
 		</ul>
@@ -76,10 +80,25 @@
 				</tr>
 			</thead>
 			<tbody>
-			</tbody>
+					<c:forEach items="${courseList}" var="courseList">
+						<tr>
+							<td><c:out value="${courseList.getCourseId()}" /></td>
+							<td><a
+								href="${pageContext.request.contextPath}/ajaxstdtasks?course_id=${courseList.getCourseId()}">
+									<c:out value="${courseList.getCourseCode()}" />
+							</a></td>
+							<td><c:out value="${courseList.getCourseTitle()}" /></td>
+							<td><c:out value="${courseList.getCredit()}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
 		</table>
 	</div>
 
 	</body>
-
+	<script>
+	$(document).ready(function(){
+	    $('#courseTable').DataTable();
+	});
+	</script>
 </html>

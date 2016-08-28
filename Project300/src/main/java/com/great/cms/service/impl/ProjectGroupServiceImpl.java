@@ -22,6 +22,7 @@ import com.great.cms.db.entity.ProjectGroup;
 import com.great.cms.db.entity.Student;
 import com.great.cms.db.entity.StudentGroup;
 import com.great.cms.db.entity.Task;
+import com.great.cms.db.entity.TaskProject;
 import com.great.cms.service.ProjectGroupService;
 
 @Service("ProjectGroupService")
@@ -94,14 +95,17 @@ public class ProjectGroupServiceImpl implements ProjectGroupService,Serializable
 	}
 	
 	@Override
-	public void addGroup(GroupInputBean groupInputBean, int projectId) {
+	public void addGroup(GroupInputBean groupInputBean, int projectId,Task task) {
 		Project project = this.projectDao.findById(projectId);
+		System.out.println("inside addGroup>>>>>>>");
+		System.out.println("Project Title "+project.getProjectTitle()+" , Project Desc "+project.getProjectDesc());
 		// Getting the first element of TaskProjectList because
 		// it is expected that there will always be only one element in the list.
 		// Each Project is mapped to One TaskProject only.
 		
 		// Save the Group entity
-		Task taskId = project.getTaskProjectList().get(0).getTaskId();
+		//Task taskId = project.getTaskProjectList().get(0).getTaskId();this was the here
+		
 		Groups group = new Groups();
 		
 		// set a random group name, since we're not taking group name as input and it must be unique
@@ -111,7 +115,8 @@ public class ProjectGroupServiceImpl implements ProjectGroupService,Serializable
 	    for(int i=0; i<7; i++)
 	    	sb.append( (char) (random.nextInt((122-65) + 1) + 65) );
 		group.setGroupName(sb.toString());
-		group.setTaskId(taskId);
+		//group.setTaskId(taskId);this was here
+		group.setTaskId(task);
 		this.groupsDao.save(group);
 		
 		// Save the ProjectGroup entity
@@ -176,6 +181,8 @@ public class ProjectGroupServiceImpl implements ProjectGroupService,Serializable
 
 	@Override
 	public void deleteGroupOfProject(int groupId) {
+		ProjectGroup projectGroup = projectGroupDao.findByGroupId(groupId);
+		System.out.println("This is the project group to be deleted "+projectGroup.getGroupId());
 		groupsDao.deleteById(groupId);
 		
 	}

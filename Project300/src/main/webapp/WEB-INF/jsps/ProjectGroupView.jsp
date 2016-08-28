@@ -63,10 +63,10 @@
 </nav>
 <div class="container">
 	<input type="hidden" id="hidden_username" name="username" value=${username}></input>
-	<p>Session Selected : <c:out value="${courseSession}"/> </p>
-	<p>Course Title : <c:out value="${courseTitle}"/> </p>
-	<p>Project Title : <c:out value="${projectTitle}"/> </p>
-	
+	${courseSession} Session > <a href="${pageContext.request.contextPath}/publicview">Course </a>> ${courseTitle} > <a href="${pageContext.request.contextPath}/courseTaskViewReq?courseId=${strCourseId}">Task</a> > ${taskTitle} > <a href="${pageContext.request.contextPath}/projectViewReq?taskId=${taskId}">Project</a> > ${projectTitle}  
+	<br>
+	<br>
+	<br>
 	<div class="panel">
 		<table id="projectTable"
 			class="table table-striped table-bordered table-hover">

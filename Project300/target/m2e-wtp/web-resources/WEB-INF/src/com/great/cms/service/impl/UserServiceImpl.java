@@ -51,6 +51,11 @@ public class UserServiceImpl implements UserService, Serializable {
 		if(users == null) System.out.println("user is null");
 		return users;
 	}
+	
+	public void saveUser(User user){
+		
+		userDao.save(user);
+	}
 
 
 }

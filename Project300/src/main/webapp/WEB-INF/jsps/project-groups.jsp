@@ -4,6 +4,7 @@
 	/*HTTP 1.1*/ response.setHeader("Pragma", "no-cache");
 	/*HTTP 1.0*/ response.setDateHeader("Expires", 0);
 %>
+<%@page import="com.great.cms.db.entity.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -46,6 +47,12 @@
 </head>
 <body>
 
+<% 
+		User user = (User) session.getAttribute("User");
+		if (user==null)
+			response.sendRedirect("Failure");
+	%>
+
 	<%
 		String courseId = null;
 		courseId = session.getAttribute("courseId").toString();
@@ -74,6 +81,8 @@
 
 
 	<div class="container">
+	
+	
 
 		<a style="float: left"
 			href="${pageContext.request.contextPath}/gototasks?course_id=<%=courseId%>">Previous

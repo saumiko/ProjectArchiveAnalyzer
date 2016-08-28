@@ -41,20 +41,41 @@ public class ProjectGroupDaoImpl extends GenericDaoImpl<ProjectGroup, Integer> i
 			return pr;
 	
 	}
-
+// this was original
+//	@Override
+//	public List<ProjectGroup> findByGroupId(int groupId) {
+//List<ProjectGroup> pr=null;
+//		
+//		//public ConfUser getConfUserByAccctMsisdn(long acctMsisdn){
+//		System.out.println("We are in ProjectGroupDao");
+//			try{
+//				//courseReg = (CourseRegistration) em.createQuery("select o from " + type.getName() + " o where o.idStudent.idStudent ="+id+" ").getResultList();
+//				String query = "select o from " + type.getName() + " o where " +
+//     				   "o.groupId.groupId = ?1 " ;
+//     	   pr =em.createQuery(query)
+//       			 .setParameter(1, groupId)
+//       			 .getResultList();
+//     	
+//     	
+//     		}
+//			catch(Exception e){
+//				System.out.println("*******failure******* trace of error "+ e);
+//				return null;
+//	        }
+//			System.out.println("*******successful*******");
+//			return pr;
+//	}
 	@Override
-	public List<ProjectGroup> findByGroupId(int groupId) {
-List<ProjectGroup> pr=null;
+	public ProjectGroup findByGroupId(int groupId) {
+		ProjectGroup pr=null;
 		
-		//public ConfUser getConfUserByAccctMsisdn(long acctMsisdn){
+		
 		System.out.println("We are in ProjectGroupDao");
 			try{
 				//courseReg = (CourseRegistration) em.createQuery("select o from " + type.getName() + " o where o.idStudent.idStudent ="+id+" ").getResultList();
 				String query = "select o from " + type.getName() + " o where " +
      				   "o.groupId.groupId = ?1 " ;
-     	   pr =em.createQuery(query)
-       			 .setParameter(1, groupId)
-       			 .getResultList();
+     	   pr = (ProjectGroup) em.createQuery(query).setParameter(1, groupId).getResultList().get(0);
      	
      	
      		}

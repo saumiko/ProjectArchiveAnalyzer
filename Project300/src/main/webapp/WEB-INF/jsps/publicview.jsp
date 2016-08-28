@@ -35,8 +35,7 @@
 <script
 	src="<c:url value="/resources/javascript/jquery.dataTables.min.js" />"
 	type="text/javascript"></script>
-
-
+	
 </head>
 <body>
 
@@ -63,15 +62,37 @@
 </nav>
 <div class="container">
 	<input type="hidden" id="hidden_username" name="username" value=${username}></input>
-	<form method="get" action="publicview">
-		<select name="session">
+	<!--  <form method="get" action="publicview">-->
+		<!--  <select name="session">
   			<option value="2010">2010</option>
   			<option value="2011">2011</option>
   			<option value="2012">2012</option>
   			<option value="2013">2013</option>
-		</select>
-		<input type="submit" value="go"> </input>
-	</form>
+		</select>-->
+		<div class="row searchbar">
+			<div class="col-xs-8">
+			</div>
+			<div class="col-xs-2">
+				<select id="filter_session" class="form-control">
+				
+				<option value="2010">2010</option>
+  			<option value="2011">2011</option>
+  			<option value="2012">2012</option>
+  			<option value="2013">2013</option>
+				</select>
+			</div>
+			<div class="col-xs-2">
+					<button onclick="go()" id="button_add_task" class="btn btn-success col-xs-12">
+
+							<i class="glyphicon glyphicon-plus-sign"></i> Go
+						</button>
+			</div>
+		</div>
+		
+		<!-- <input type="submit" value="go"> </input> -->
+		
+		
+	<!-- </form> -->
 	<p>Session : ${courseSession} </p>
 	<div class="panel">
 		<table id="courseTable"
@@ -103,5 +124,11 @@
 	$(document).ready(function(){
 	    $('#courseTable').DataTable();
 	});
+	
+	function go(){
+		var t = document.getElementById('filter_session').value.toString();
+		var jspcall = "publicview?session="+t;
+		window.location.href = jspcall;
+	}
 	</script>
 </html>

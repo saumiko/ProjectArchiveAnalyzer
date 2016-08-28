@@ -8,6 +8,10 @@ public interface CourseRegistrationService {
 	
 	public List<CourseRegistration> getStudentRegistration(int id);
 	
+	public int getNextCourseRegId();
+	
+	public void save(CourseRegistration courseRegistration);
+	
 	//public List<String> getCountryList();
 	
 }

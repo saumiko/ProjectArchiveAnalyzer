@@ -27,6 +27,10 @@ $(document).ready(
 					"mData" : 3
 
 				}
+				, {
+					"mData" : 4
+
+				}
 
 				],
 				ajax : {

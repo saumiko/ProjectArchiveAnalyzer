@@ -13,4 +13,6 @@ import com.great.cms.db.entity.CourseRegistration;
  */
 public interface CourseRegistrationDao  extends GenericDao<CourseRegistration, Integer> {
 	public List<CourseRegistration> getRegistrationByIdStudent(int id);
+	
+	public int getNextCourseRegId();
 }

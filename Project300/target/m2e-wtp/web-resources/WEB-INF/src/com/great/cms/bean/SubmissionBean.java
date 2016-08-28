@@ -5,6 +5,16 @@ public class SubmissionBean {
 	private String submissionTime;
 	private byte[] submissionFile;
 	private Integer groupId;
+	private Integer submissionVer;
+	
+	
+	public Integer getSubmissionVer(){
+		return submissionVer;
+	}
+	
+	public void setSubmissionVer(Integer submissionVer){
+		this.submissionVer = submissionVer;
+	}
 	
 	public Integer getGroupId() {
 		return groupId;

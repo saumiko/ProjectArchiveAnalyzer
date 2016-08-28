@@ -9,8 +9,9 @@ public interface TaskProjectService {
 	public List<Project> findProjectsByTaskID(int taskId);
 	public List<Project> findProjects(int taskId, String session, String semester);
 	public void addProjectOfTask(Project project, int taskId);
-	public void updateProject(ProjectBean project);
+	public void updateProject(ProjectBean project,float taskId);
 	public void deleteProjectOfTask(int projectId);
+	public void deleteTaskProjectByProjectId(int projectId);
 	
 		
 }

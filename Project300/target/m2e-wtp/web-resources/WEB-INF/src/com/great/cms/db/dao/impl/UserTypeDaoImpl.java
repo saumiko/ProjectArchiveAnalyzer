@@ -16,21 +16,20 @@ public class UserTypeDaoImpl extends GenericDaoImpl<UserType, Integer> implement
 	}
 
 	@Override
-	public UserType findByUserTypeName(String Name) {
+	public UserType findByUserTypeName(String name) {
 		UserType user = null;
 		try{
-			user = (UserType) em.createQuery("select o from " + type.getName() + " o where o.userTypeName="+Name+" ").getResultList().get(0);
+			String query = "select o from "+type.getName()+" o where o.userTypeName = ?1"; 
+			user = (UserType) em.createQuery(query).setParameter(1, name).getResultList().get(0);
  	
  		}
 		catch(Exception e){
-			System.out.println("*******failure*******");
+			System.out.println(e);
         }
 		    System.out.println("*******successful*****");
 		return user;
 		
 		
 	}
-
-	
     
 }

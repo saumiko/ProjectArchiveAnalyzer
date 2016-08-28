@@ -30,6 +30,7 @@ public class TaskProjectServiceImpl implements TaskProjectService,Serializable{
 	private ExamCommitteeDao examCommitteeDao;
 	
 	
+	
 	@Override
 	public List<Project> findProjectsByTaskID(int taskId){
 		
@@ -62,18 +63,30 @@ public class TaskProjectServiceImpl implements TaskProjectService,Serializable{
 		TaskProject taskProject = new TaskProject();
 		taskProject.setProjectId(project);
 		taskProject.setTaskId(taskDao.findById(taskId));
+		System.out.println("This is the Task Object "+taskDao.findById(taskId));
 		taskProjectDao.save(taskProject);
 	}
 
 
 	@Override
-	public void updateProject(ProjectBean projectBean) {
+	public void updateProject(ProjectBean projectBean,float taskId) {
 		System.out.println("Triggered Project Update: "+projectBean.toString());
+		int taskId2 = (int) taskId;
+		TaskProject taskProject = taskProjectDao.findById(taskId2);
 		Project project = this.projectDao.findById(projectBean.getProjectId());
 		project.setProjectTitle(projectBean.getProjectTitle());
 		project.setProjectDesc(projectBean.getProjectDesc());
+		//taskProject.setProjectId(project);
 		this.projectDao.update(project);
-		
+	}
+	
+	@Override
+	public void deleteTaskProjectByProjectId(int projectId){
+		TaskProject taskProject = taskProjectDao.findByProjectId(projectId);
+		System.out.println("This is the to be deleted TaskProject");
+		System.out.println(taskProject.getTaskId());
+		System.out.println(taskProject.getTaskProjectId());
+		taskProjectDao.delete(taskProject);
 	}
 
 

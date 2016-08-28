@@ -47,75 +47,24 @@ public class StudentTaskController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET, value = "/ajaxstdtasks")
-	public @ResponseBody
+	public
 	String getstdTaskList(Model model,@RequestParam("course_id")int courseId, @ModelAttribute("UserRole") User user) {
-		try{
+		
 
 			System.out.println("StudentCourse Id in student Task Controller: "+courseId);
 				
-				// TODO: static list of tasks displayed for course_id 1, change to dynamic
+				
 				
 				List<Task> tasks = taskService.getTaskListByCourseId(courseId);
-				/*Student student=getRegistration(username);
-				System.out.println("registration id" +student.getRegistrationNo());*/
+				
 				model.addAttribute("tasks", tasks);
 				System.out.println("User in taskcontroller" +user.getUserName());
-				//model.addAttribute("username", user);
 				
-				//model.addAttribute("student", student);
 				
-				jsonArray = new JSONArray();
-				if (tasks == null)
-					System.out.println("TaskController : LIST IS NULL");
-
-				for (Task t : tasks) {
-					JSONArray jObj = new JSONArray();
-					jObj.add(t.getTaskId().toString());
-					jObj.add(t.getTaskTitle());
-					/*
-					 * if( t.getTaskTypeId().getTaskTypeId()==1) jObj.add("Project");
-					 * else jObj.add("Assignment");
-					 */
-					//jObj.add(t.getTaskTypeId().getTaskTypeId());
-					switch(t.getTaskTypeId().getTaskTypeId()){
-					case 1:
-						jObj.add("Assignment");
-						break;
-					case 2:
-						jObj.add("Project");
-						break;
-					case 3:
-						jObj.add("Thesis");
-					}
-					jObj.add(t.getTaskDesc());
-					jObj.add(t.getTaskDeadline().toString());
-					jObj.add(String.valueOf(t.getIsOpen()));
-					jObj.add(String.valueOf(t.getTaskTotalGroupNo()));
-					jObj.add(String.valueOf(t.getTaskTotalSubmissonNo()));
-
-					jsonArray.add(jObj);
-
-				}
-				JSONObject parameters = new JSONObject();
-
-				parameters.put("draw", 1);
-
-				parameters.put("recordsTotal", 1);
-
-				parameters.put("recordsFiltered", 1);
-
-				parameters.put("data", jsonArray);
-
-				String taskJson = parameters.toJSONString();
-
-				// System.out.print("DLSJDHSLKJDH:  "+taskJson);
-				return taskJson;
-		}
-		catch(Exception e){
-			System.out.println("Somting error"+e);
+				
 			
-			return null;
-		}
+			return "stdtasks";
+		
 
 	}
 }

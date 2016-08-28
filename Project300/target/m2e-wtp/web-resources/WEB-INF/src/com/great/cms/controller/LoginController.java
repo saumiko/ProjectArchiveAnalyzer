@@ -3,7 +3,7 @@ package com.great.cms.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +43,7 @@ public class LoginController {
 	@RequestMapping(value = "/checklogin", method = RequestMethod.POST)
 	public String checkLogin(@RequestParam("user_name") String username,
 			@RequestParam("password") String password, Model model,
-			HttpServletRequest request) {
+			HttpServletRequest request,HttpSession session) {
 
 		System.out.println("Username and Password: " + username + " "
 				+ password);
@@ -64,7 +64,9 @@ public class LoginController {
 			model.addAttribute("userId", user.getUserId());
 			model.addAttribute("username", username);
 			model.addAttribute("UserRole" , user);
-			
+			//new added
+			session.setAttribute("User",user);
+			//
 			System.out.println("Password: " + password);
 			String Role=user.getUserTypeId().getUserTypeName();
 			System.out.println("role now "+Role);
@@ -72,8 +74,13 @@ public class LoginController {
 				System.out.println("Going to teacher course");
 				return "course";
 			}
-			else
-			return "stdcourse";
+			else{
+				List<Course> courses = null;
+				courses = courseService.getCourseListByUserType(user);
+				model.addAttribute("courseList", courses);
+				return "stdcourse";
+			}
+			
 		}
 
 		else {
@@ -85,7 +92,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/sign-in.html", method = RequestMethod.GET)
-	public String logOut( Model model) {
+	public String logOut(Model model,HttpSession session) {
+		
+		 session.invalidate();
+		  if(model.containsAttribute("UserRole")) model.asMap().remove("UserRole");
 		
 		return "login";
 		

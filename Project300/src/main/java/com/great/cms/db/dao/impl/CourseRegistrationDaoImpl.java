@@ -46,5 +46,18 @@ public class CourseRegistrationDaoImpl extends GenericDaoImpl<CourseRegistration
 			return list;
 		//}
 	}
+	
+	public int getNextCourseRegId(){
+		int nextId=0;
+		try{
+			String query = "from CourseRegistration";
+			List<CourseRegistration> courseRegistrationList = em.createQuery(query).getResultList();
+			nextId = courseRegistrationList.size()+1;
+		}
+		catch(Exception e){
+			System.out.println("ERROR IN GETNEXT COURSE REG ID");
+		}
+		return nextId;
+	}
 
 }

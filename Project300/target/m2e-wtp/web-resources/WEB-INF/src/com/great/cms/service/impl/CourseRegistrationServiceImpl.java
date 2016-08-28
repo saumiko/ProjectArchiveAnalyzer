@@ -26,4 +26,13 @@ public class CourseRegistrationServiceImpl implements CourseRegistrationService,
 		List<CourseRegistration> courseRegList = courseRegistrationDao.getRegistrationByIdStudent(id);
 		return courseRegList;	
 	}	
+	
+	public int getNextCourseRegId(){
+		int nextId = courseRegistrationDao.getNextCourseRegId();
+		return nextId;
+	}
+	
+	public void save(CourseRegistration courseRegistration){
+		courseRegistrationDao.save(courseRegistration);
+	}
 }

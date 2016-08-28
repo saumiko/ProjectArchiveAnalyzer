@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.great.cms.db.entity.*"%>
 <% response.setHeader("Cache-Control","no-cache"); 
 /*HTTP 1.1*/ response.setHeader("Pragma","no-cache"); 
 /*HTTP 1.0*/ response.setDateHeader ("Expires", 0);
@@ -60,12 +61,19 @@
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="#">${UserRole.getUserName()}</a></li>
 			<li><a href="#">Settings</a></li>
+			<li><a href="${pageContext.request.contextPath}/addcourse">Add Course</a></li>
 			<li><a href="sign-in.html">Log Out</a></li>
 		</ul>
 	</div>
 </div>
 </nav>
 <div class="container">
+	
+	<% 
+		User user = (User) session.getAttribute("User");
+		if (user==null)
+			response.sendRedirect("Failure");
+	%>
 	<input type="hidden" id="hidden_username" name="username" value="${UserRole.getUserName()}"></input>
 	<div class="panel">
 		<table id="courseTable"
@@ -76,6 +84,7 @@
 					<th class="col-md-3 col-sm-3 col-xs-3">Course Code</th>
 					<th class="col-md-2 col-sm-2 col-xs-2">Course Title</th>
 					<th class="col-md-2 col-sm-2 col-xs-2">Course Credit</th>
+					<th class="col-md-2 col-sm-2 col-xs-2">Session</th>
 				</tr>
 			</thead>
 			<tbody>

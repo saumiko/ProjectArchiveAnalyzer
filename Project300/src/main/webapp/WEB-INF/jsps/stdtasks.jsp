@@ -5,7 +5,7 @@
 /*HTTP 1.1*/ response.setHeader("Pragma","no-cache"); 
 /*HTTP 1.0*/ response.setDateHeader ("Expires", 0);
 %> 
-
+<%@page import="com.great.cms.db.entity.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -38,8 +38,7 @@
 <script
 	src="<c:url value="/resources/javascript/dataTables.bootstrap.js" />"
 	type="text/javascript"></script>
-<script src="<c:url value="/resources/studentjs/stdtasks.js" />"
-	type="text/javascript"></script>
+
 
 </head>
 <body>
@@ -52,6 +51,11 @@
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
 		<a class="navbar-brand" href="/greatweb">SUST Archives<sup>beta</sup></a>
+		<% 
+		User user = (User) session.getAttribute("User");
+		if (user==null)
+			response.sendRedirect("Failure");
+	%>
 	</div>
 	<div
 		class="
@@ -68,9 +72,7 @@
 <div class="container">
     <div class="row searchbar">
 	<div class="col-xs-8">
-				<p class="table-headertext">
-					Course: <span id="course_code">${course_code}</span>
-				</p>
+				
 				
 				
 			</div>
@@ -78,29 +80,43 @@
 			
 		<div class="clearfix"></div>	
 	<div class="panel">
-	
+		
 		<table id="taskTable"
 			class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<th class="col-md-1 col-sm-1 col-xs-1">ID</th>
 						<th class="col-md-3 col-sm-3 col-xs-3">Title</th>
-						<th class="col-md-2 col-sm-2 col-xs-2">Type</th>
-						<th class="col-md-2 col-sm-2 col-xs-2">Details</th>
+						
+						
 						<th class="col-md-1 col-sm-1 col-xs-1">Deadline</th>
-						<th class="col-md-1 col-sm-1 col-xs-1">Submission open</th>
-						<th class="col-md-1 col-sm-1 col-xs-1">Total No. Of Groups</th>
-						<th class="col-md-1 col-sm-1 col-xs-1">Total Submission</th>
+						
 
 				</tr>
 			</thead>
 			<tbody>
-			</tbody>
+					<c:forEach items="${tasks}" var="tasks">
+						<tr>
+							<td><c:out value="${tasks.getTaskId()}" /></td>
+							<td><a
+								href="${pageContext.request.contextPath}/projectstdgroups?task_id=${tasks.getTaskId()}">
+									<c:out value="${tasks.getTaskTitle()}" />
+							</a></td>
+							
+						
+							<td><c:out value="${tasks.getTaskDeadline()}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
 		</table>
 	</div>
 
 	<a href="<c:url value="/"/>">Index Page</a>
 	</div>
 	</body>
-
+<script>
+	$(document).ready(function(){
+	    $('#taskTable').DataTable();
+	});
+	</script>
 </html>

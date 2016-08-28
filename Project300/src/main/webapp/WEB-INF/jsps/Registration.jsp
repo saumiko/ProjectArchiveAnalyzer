@@ -58,25 +58,25 @@
 
      <div id="container">
 		
-		<form action="checklogin" method="post">
+		<form action="submitRegistrationForm" method="post">
 		
 		<label for="name">Username:</label>
 		
-		<input type="name" id="username" name="user_name">
+		<input type="name" id="userName" name="userName">
 		
 		<label for="password">Password:</label>
 		
-		<input id="password"name="password" type="password">
+		<input id="password" name="password" type="password">
 		
 		<label for="email">Email:</label>
 		
-		<input type="name" id="email" name="email">
+		<input type="name" id="userEmail" name="userEmail">
 		
 		<label for="UserType">User Type:</label>
 		
-		<select name="UserType">
-			<option value="2" type = "name">Teacher</option>
-			<option value="3" type = "name">Student</option>
+		<select name="userTypeName">
+			<option value="Teacher" >Teacher</option>
+			<option value="Student" >Student</option>
 		</select>
 		
 		<div id="lower">

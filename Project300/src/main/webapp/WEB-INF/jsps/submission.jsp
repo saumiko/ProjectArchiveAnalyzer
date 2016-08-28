@@ -3,6 +3,7 @@
 /*HTTP 1.1*/ response.setHeader("Pragma","no-cache"); 
 /*HTTP 1.0*/ response.setDateHeader ("Expires", 0);
 %> 
+<%@page import="com.great.cms.db.entity.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -61,6 +62,11 @@
             
                 
             </div>
+            <% 
+		User user = (User) session.getAttribute("User");
+		if (user==null)
+			response.sendRedirect("Failure");
+	%>
         </div>
         <div class="clearfix"></div>
 
@@ -113,6 +119,9 @@
                         <div class="row">
                             <div class="col-md-4"><label></label></div>
                             <div class="col-md-8"><a id="view_submission_download">download source</a></div></div>
+                        <div class="row">
+                            <div class="col-md-4"><label></label></div>
+                            <div class="col-md-8"><a id="mtest">Verify Submission</a></div></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -63,8 +63,7 @@
 </nav>
 <div class="container">
 	<input type="hidden" id="hidden_username" name="username" value=${username}></input>
-	<p>Session : ${courseSession} </p>
-	<p>Course Title : <c:out value="${courseTitle}"/> </p>
+	${courseSession} Session > <a href="${pageContext.request.contextPath}/publicview">Course </a>> ${courseTitle}
 	<div class="panel">
 		<table id="taskTable"
 			class="table table-striped table-bordered table-hover">

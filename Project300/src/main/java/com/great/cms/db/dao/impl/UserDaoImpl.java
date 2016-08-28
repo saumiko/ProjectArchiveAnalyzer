@@ -77,5 +77,8 @@ public class UserDaoImpl extends GenericDaoImpl<User, Integer>implements UserDao
 		    System.out.println("*******successful*******");
 		return users;
 	}
+	
+	
+	
 
 }

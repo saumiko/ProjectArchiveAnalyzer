@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,7 +42,7 @@ public class TaskProject implements Serializable,DomainObject {
     @ManyToOne(optional = false)
     private Task taskId;
     @JoinColumn(name = "project_id", referencedColumnName = "project_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch=FetchType.EAGER)
     private Project projectId;
 
     public TaskProject() {

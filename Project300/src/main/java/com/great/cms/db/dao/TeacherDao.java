@@ -19,6 +19,6 @@ public interface TeacherDao extends GenericDao<Teacher, Long> {
 	
 	public List<Teacher> findByDeptId(Integer deptId);
 	
-	
+	public Long getAllTeacher(); 
 
 }

@@ -34,4 +34,20 @@ public class TaskProjectDaoImpl extends GenericDaoImpl<TaskProject, Integer>
 			 return list;
 	}
 	
+	@Override
+	public TaskProject findByProjectId (int projectId) {
+		 TaskProject taskProject = null;
+		 
+		 
+		 String query = "select o from " + type.getName() + " o where " +
+				   "o.projectId.projectId = ?1 ";
+	taskProject = (TaskProject)em.createQuery(query)
+			 .setParameter(1, projectId)
+			 .getResultList().get(0);
+	
+	
+		 
+			 return taskProject;
+	}
+	
 	}

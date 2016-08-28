@@ -117,7 +117,8 @@ $(document)
 						$('#modal_label').html("Add task");
 						$('#edit_task_title').val("");
 						$('#edit_task_description').val("");
-						$('#edit_task_deadline').val("06/01/2015 12:00:00");
+						//$('#edit_task_deadline').val("06/01/2015 12:00:00");
+						$('#edit_task_deadline').val("yyyy-mm-dd 12:00:00");
 						$('#edit_task_total_submission').val("10");
 						$('edit_task_sopen').val("true");
 						$('#edit_task_description').val("");

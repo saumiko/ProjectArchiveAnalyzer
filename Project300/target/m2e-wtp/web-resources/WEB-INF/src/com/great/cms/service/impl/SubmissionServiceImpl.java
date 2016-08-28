@@ -99,6 +99,7 @@ public class SubmissionServiceImpl implements SubmissionService,Serializable{
 		Submission submission = new Submission();
 		submission.setSubmissionTime(submissionBean.getSubmissionTime());
 		submission.setCommentTeacher(submissionBean.getCommentTeacher());
+		submission.setSubmissionVer(submissionBean.getSubmissionVer());
 		
 		//Submission s = null;
 		ProjectGroupSubmit pgs = new ProjectGroupSubmit(); 
@@ -109,6 +110,8 @@ public class SubmissionServiceImpl implements SubmissionService,Serializable{
 	    String newFileName = fileNameFromDate(submission.getSubmissionTime(), submissionBean.getGroupId());
 	    
 	    uploadDirectory = "F:\\Work\\Upload Repo\\"+ newFileName + ".zip";
+	    
+	    System.out.println("This is new file name + "+newFileName);
 	    
 	    if(multipartFile.getSize()>0){
 	    	try {
@@ -134,8 +137,11 @@ public class SubmissionServiceImpl implements SubmissionService,Serializable{
 	    }
 		
 		submissionDao.save(submission);
+		
+		System.out.println(" This is the group id "+projectGroupDao.findById(submissionBean.getGroupId()));
 
-		pgs.setProjectGroupId(projectGroupDao.findById(submissionBean.getGroupId()));
+		//pgs.setProjectGroupId(projectGroupDao.findById(submissionBean.getGroupId())); original line
+		pgs.setProjectGroupId(projectGroupDao.findByGroupId(submissionBean.getGroupId())); 
 		pgs.setSubmissionId(submission);
 		
 		projGroupSubDao.save(pgs);

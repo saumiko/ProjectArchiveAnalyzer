@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.great.cms.db.entity.ProjectGroup;
 import com.great.cms.db.entity.Student;
+import com.great.cms.db.entity.Task;
 import com.great.cms.bean.GroupBean;
 import com.great.cms.bean.GroupInputBean;
 
@@ -15,7 +16,7 @@ public interface ProjectGroupService {
 	public String findProjectTitleByGroupId(int groupId);
 	// Discarded
 	public void addGroupOfProject(int projectId, String groupName, List<Student>studentList,int taskId);
-	public void addGroup(GroupInputBean groupInputBean, int projectId);
+	public void addGroup(GroupInputBean groupInputBean, int projectId,Task task);
 	// Discarded
 	public void editGroupOfProject(int groupId, List<Student> studentList);
 	public void editGroup(GroupInputBean groupBean);

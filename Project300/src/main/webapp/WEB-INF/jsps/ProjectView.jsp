@@ -63,8 +63,8 @@
 </nav>
 <div class="container">
 	<input type="hidden" id="hidden_username" name="username" value=${username}></input>
-	<p>Session : ${courseSession} </p>
-	<p>Course Title : <c:out value="${courseTitle}"/> </p>
+	${courseSession} Session > <a href="${pageContext.request.contextPath}/publicview">Course </a>> ${courseTitle} > <a href="${pageContext.request.contextPath}/courseTaskViewReq?courseId=${strCourseId}">Task</a> > ${taskTitle} 
+	<br>
 	<a href="projectViewReq?taskId=${taskId}">See Project Wise </a>/
 	<a href="projectGroupViewReq?taskId=${taskId}">See Group Wise</a>
 	<div class="panel">

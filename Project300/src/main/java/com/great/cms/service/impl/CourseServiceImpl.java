@@ -53,6 +53,18 @@ public class CourseServiceImpl implements CourseService, Serializable{
 	
 	User user=null;
 	
+	
+	public void saveCourse(Course course){
+		courseDao.save(course);
+	}
+	
+	public Course findByCourseCode2(String courseCode,int session){
+		Course course = (Course)courseDao.findByCourseCode2(courseCode,session);
+		return course;
+	}
+	
+	
+	
 	@Override
 	public List<Course> getCourseList() {
 		List<Course> courseList = null;

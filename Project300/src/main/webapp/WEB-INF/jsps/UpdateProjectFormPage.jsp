@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.great.cms.db.entity.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -48,6 +49,12 @@
 	</nav>
 	<div class="container">
   <h2>Update Project Info</h2>
+  
+  	<% 
+		User user = (User) session.getAttribute("User");
+		if (user==null)
+			response.sendRedirect("Failure");
+	%>
   <form action="${pageContext.request.contextPath}/updateproject" method="get">
 	
 	<input type="hidden" class="form-control" id="taskId" name="taskId" value="${task_id}">

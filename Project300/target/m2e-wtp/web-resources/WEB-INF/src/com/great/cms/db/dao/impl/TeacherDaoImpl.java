@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.great.cms.db.dao.TeacherDao;
+import com.great.cms.db.entity.Course;
 import com.great.cms.db.entity.Teacher;
 //Tested
 @Repository("TeacherDao")
@@ -82,5 +83,9 @@ public class TeacherDaoImpl extends GenericDaoImpl <Teacher, Long>implements Tea
 		return teacher;
 	}
 
-
+	public Long getAllTeacher(){
+		
+		List<Teacher> teachers = (List<Teacher>) em.createQuery("from Teacher").getResultList();
+		return (long) (teachers.size()+1);
+	}
 }

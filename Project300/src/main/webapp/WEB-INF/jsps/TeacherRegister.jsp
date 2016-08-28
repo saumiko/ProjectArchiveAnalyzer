@@ -58,22 +58,25 @@
 
      <div id="container">
 		
-		<form action="checklogin" method="post">
+		<p> Your Username for Login is ${User.getUserName()} </p>
 		
-		<label for="name">Department:</label>
+		<form action="submitTeacherRegistrationForm" method="post">
 		
-		<input type="name" id="dept" name="user_name">
+		<label for="name">Employee Code</label>
+		
+		<input type="name" name="employeeCode">
+		
+		<input type="hidden" name="isPermanent" value="1">
+		<input type="hidden" name="email" value="aaa">
+		<input type="hidden" name="isAvailable" value="1">
 		
 		<label for="Designation">Designation:</label>
 		
-		<select name="UserType">
+		<select name="dsgId">
 			<option value="1" type = "name">Professor</option>
 			<option value="2" type = "name">Assistant Professor</option>
 			<option value="3" type = "name">Lecturer</option>
 		</select>
-		
-		<input type="hidden" name="Permanent" value="1">
-		<input type="hidden" name="Available" value="1">
 		
 		
 		<div id="lower">

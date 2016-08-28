@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.great.cms.bean.SubmissionBean;
+import com.great.cms.db.dao.ProjectGroupDao;
 import com.great.cms.db.dao.SubmissionDao;
 import com.great.cms.db.entity.Submission;
 import com.great.cms.service.ProjectGroupSubmitService;
@@ -42,6 +43,8 @@ public class SubmissionController {
 
 	@Autowired
 	private ProjectGroupSubmitService projGrpSubService;
+	
+	@Autowired ProjectGroupDao projectGroupDao;
 
 	private JSONArray jsonArray;
 
@@ -53,7 +56,7 @@ public class SubmissionController {
 		List<Submission> submissionList = null;
 
 		submissionList = projGrpSubService
-				.findSubmissionListByProjectGroupId(groupId);
+				.findSubmissionListByProjectGroupId(projectGroupDao.findByGroupId(groupId).getProjectGroupId());
 		
 		jsonArray = new JSONArray();
 
@@ -114,44 +117,15 @@ public class SubmissionController {
 	String doUpload(SubmissionBean submissionBean,
 			@RequestParam("file") MultipartFile multipartFile)
 			throws FileNotFoundException {
+		
+		
 		System.out
 				.println("We're in addSubmission/doUpload method.\nfilename: "
 						+ multipartFile.getOriginalFilename() + "\nComment: "
 						+ submissionBean.getCommentTeacher());
-		//Uploading file to a specific folder//
-
-		// InputStream inputStream = null;
-		 //FileOutputStream outputStream =null;
-		
-		 //if(multipartFile.getSize()>0){
-		// try {
-		// inputStream = multipartFile.getInputStream();
-		// outputStream = new
-		// FileOutputStream("G:\\Work\\Upload Repo\\"+multipartFile.getOriginalFilename());
-		// int readBytes = 0;
-		// byte[] buffer = new byte[8192];
-		// while ((readBytes = inputStream.read(buffer, 0, 8192)) != -1) {
-		// System.out.println("===ddd=======");
-		// outputStream.write(buffer, 0, readBytes);
-		// }
-		// outputStream.close();
-		// inputStream.close();
-		//
-		//
-		//
-		//
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		//
-		// }
-
-		// Saving the Submission Entity//
+		System.out.println("this is the group id in do upload "+submissionBean.getGroupId());
+		submissionBean.setSubmissionVer(0);
 		submissionService.saveSubmission(submissionBean, multipartFile);
-
-		// projGrpSubService.addProjectGroupSubmit(submission, 2,
-		// multipartFile);
 		return "Uploaded: " + multipartFile.getSize() + " bytes";
 	}
 	
@@ -220,6 +194,17 @@ public class SubmissionController {
 			
 		}
 
+		return "{ \"success\" : true }";
+	}
+	
+	@RequestMapping(value = "/verifysubmission", method = RequestMethod.GET)
+	public @ResponseBody
+	String verifySubmission(@RequestParam("submissionId") int submissionId) {
+
+		System.out.println("This is the submission info from verifysubmission "+submissionDao.findById(submissionId));
+		Submission submission = submissionDao.findById(submissionId);
+		submission.setSubmissionVer(1);
+		submissionDao.update(submission);
 		return "{ \"success\" : true }";
 	}
 

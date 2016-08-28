@@ -7,6 +7,13 @@ public class GroupBean {
 	private ArrayList<String> memberList;
 	private String groupName;
 	private int submissionCount;
+	private String memberString;
+	public String getMemberString() {
+		return memberString;
+	}
+	public void setMemberString(String memberString) {
+		this.memberString = memberString;
+	}
 	public int getSubmissionCount() {
 		return submissionCount;
 	}

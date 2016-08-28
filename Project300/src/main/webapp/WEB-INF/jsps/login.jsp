@@ -83,9 +83,7 @@
 		</div>
 		
 		</form>
-		
-		<a href="${pageContext.request.contextPath}/goToRegistration">Register</a>
-		
+		<a href="${pageContext.request.contextPath}/register">Sign Up</a>
 	</div>
 	
 

@@ -25,8 +25,11 @@ public class GenericDaoImpl<T extends DomainObject, ID extends Serializable> imp
 
     protected Class<T> type;
     
+    
+    //extended
     @PersistenceContext(type=PersistenceContextType.EXTENDED)
     protected EntityManager em;
+    
 
     public GenericDaoImpl(Class<T> type) {
         this.type = type;
@@ -80,7 +83,7 @@ public class GenericDaoImpl<T extends DomainObject, ID extends Serializable> imp
     @Transactional(readOnly = false)
     public void save(T object) throws RuntimeException {
        em.persist(object);
-        
+       
     }
 
     /**
@@ -89,13 +92,9 @@ public class GenericDaoImpl<T extends DomainObject, ID extends Serializable> imp
     @Override
     @Transactional(readOnly = false)
     public void update(T object)throws RuntimeException {
-    	em.merge(object);
-        /*try{
-        	
-        }
-        catch(Exception e){
-			e.printStackTrace();
-        }*/
+    	//em.merge(object); previous
+    	em.persist(object);
+    	
     }
 
     @Override
@@ -112,8 +111,7 @@ public class GenericDaoImpl<T extends DomainObject, ID extends Serializable> imp
     @Transactional(readOnly = false)
     public void delete(T object) throws RuntimeException {
     	em.remove(em.contains(object) ? object : em.merge(object));
-
-    	//em.remove(object);
+    	
     }
     
     /**
@@ -124,6 +122,7 @@ public class GenericDaoImpl<T extends DomainObject, ID extends Serializable> imp
     public void deleteById(ID id) throws RuntimeException {
     	T object =  findByIdNativeType(id);
 		em.remove(object);
+		
     }
     
     /**

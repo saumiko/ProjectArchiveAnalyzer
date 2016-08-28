@@ -9,11 +9,13 @@ public interface CourseService {
 	List<Course> getCourseList();
 	List<Course> getCourseBySession(int session);
 	
+	public Course findByCourseCode2(String courseCode,int session);
 	
-
 	List<Course> getCourseListByUserId(Long id);
 	String getCourseById(int id);
 	List<Course> getCourseListByUser(String username);
 	List<Course> getCourseListByUserType(User user);
+	
+	public void saveCourse(Course course);
 
 }

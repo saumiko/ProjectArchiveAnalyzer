@@ -57,62 +57,61 @@ public class StudentProjectController {
 	// get porject for student
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET, value = "/ajaxstdprojects")
-	public @ResponseBody String getProjectListforstd(Model model, @RequestParam("task_id") int taskId,
-			@ModelAttribute("UserRole") User user)
+	//public @ResponseBody String getProjectListforstd(Model model, @RequestParam("task_id") int taskId,
+	public  String getProjectListforstd(Model model, @RequestParam("task_id") int taskId
+			,@ModelAttribute("UserRole") User user)
 
 	{
-		System.out.println("StudentProjectController");
-		Student std = stdDao.getStudentByUserId(user.getUserId());
-        System.out.println("student name "+std.getFirstName());
-		StudentGroup stdGrp = null;
+//		System.out.println("StudentProjectController");
+//		Student std = stdDao.getStudentByUserId(user.getUserId());
+//        System.out.println("student name "+std.getFirstName());
+//		StudentGroup stdGrp = null;
+//		List<Project> projectList = null;
+//
+//		projectList = findByStudentId(std.getStudentId(), taskId);
+//
+//		
+//
+//		jsonArray = new JSONArray();
+//
+//		if (projectList == null)
+//			System.out.println("Project Controller -> getProjectList : LIST IS NULL");
+//		if (projectList.size() == 0)
+//			System.out.println("Project Controller -> getProjectList : LIST IS EMPTY");
+//
+//		for (Project proj : projectList) {
+//			JSONArray jsonObj = new JSONArray();
+//			jsonObj.add(proj.getProjectId().toString());
+//			jsonObj.add(proj.getProjectTitle());
+//			jsonObj.add(proj.getProjectDesc());
+//
+//			
+//
+//			jsonArray.add(jsonObj);
+//		}
+//
+//		JSONObject parameters = new JSONObject();
+//
+//		parameters.put("draw", 1);
+//
+//		parameters.put("recordsTotal", 1);
+//
+//		parameters.put("recordsFiltered", 1);
+//
+//		parameters.put("data", jsonArray);
+//
+//		String submissionJson = parameters.toJSONString();
+//
+//		
+//		return submissionJson;
+		System.out.println("INSIDE AJAX PROJECTS \n");
 		List<Project> projectList = null;
 
-		projectList = findByStudentId(std.getStudentId(), taskId);
+		projectList = taskProjectService.findProjectsByTaskID(taskId);
 
-		// System.out.println("Project Controller -> getProjectList " +
-		// projectList);
-
-		// model.addAttribute("submissions",submissionList);
-
-		jsonArray = new JSONArray();
-
-		if (projectList == null)
-			System.out.println("Project Controller -> getProjectList : LIST IS NULL");
-		if (projectList.size() == 0)
-			System.out.println("Project Controller -> getProjectList : LIST IS EMPTY");
-
-		for (Project proj : projectList) {
-			JSONArray jsonObj = new JSONArray();
-			jsonObj.add(proj.getProjectId().toString());
-			jsonObj.add(proj.getProjectTitle());
-			jsonObj.add(proj.getProjectDesc());
-
-			// proj.ge
-
-			/*
-			 * if( s.getTaskTypeId().getTaskTypeId()==1) jsonObj.add("Project");
-			 * else jsonObj.add("Assignment");
-			 */
-
-			// System.out.println("proj id : " + proj.getProjectId());
-
-			jsonArray.add(jsonObj);
-		}
-
-		JSONObject parameters = new JSONObject();
-
-		parameters.put("draw", 1);
-
-		parameters.put("recordsTotal", 1);
-
-		parameters.put("recordsFiltered", 1);
-
-		parameters.put("data", jsonArray);
-
-		String submissionJson = parameters.toJSONString();
-
-		// System.out.print("DLSJDHSLKJDH: "+taskJson);
-		return submissionJson;
+		model.addAttribute("projectList",projectList);
+		
+		return "StudentPersonalProjects";
 
 	}
 	
