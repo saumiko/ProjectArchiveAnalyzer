@@ -44,5 +44,32 @@ public class ProjectGroupSubmitDaoImpl extends
 		return list;
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ProjectGroupSubmit> findByProjectGroupId(
+			int projectGroupId) {
+		
+		List<ProjectGroupSubmit> list = null;
+
+		String query = "select o from " + type.getName() + " o where "
+				+ "o.projectGroupId.projectGroupId = ?1 ";
+		try {
+			list = em.createQuery(query).setParameter(1, projectGroupId).getResultList();
+			
+		} catch (Exception e) {
+			
+			System.out.println("getSubmissionByProjectGroup Failed. projectGroupId= "
+							+ projectGroupId + " error trace :");
+			
+			e.printStackTrace();
+			
+			return null;
+		}
+		
+		System.out.println("getSubmissionByProjectGroup succesful. projectGroupId   = "+ projectGroupId);
+		return list;
+
+	}
 
 }

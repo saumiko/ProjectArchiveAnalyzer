@@ -208,17 +208,40 @@ public class GroupController {
 
 	@RequestMapping(value = "/gotoupdategroupformpage")
 	public String goToUpdateGroupFormPage(@RequestParam("groupId") int groupId, @RequestParam("taskId") int taskId,
-			Model model) {
+			Model model,HttpSession session) {
 		model.addAttribute("groupId", groupId);
 		model.addAttribute("task_id", taskId);
+		
+		//newly added for group page update
+		int projectId = (int) session.getAttribute("projectId");
+		List<GroupBean> groupList = null;
+		groupList = projectGroupService.findGroupsByProjectId(projectId);
+		ArrayList<String> groupMemberList = new ArrayList<String>();
+		for (GroupBean gr : groupList){
+			if (gr.getGroupId() == groupId){
+				groupMemberList = gr.getMemberList();
+				break;
+			}
+		}
+		int i = 1;
+		for (String str : groupMemberList){
+			model.addAttribute("groupMember"+i, str);
+			++i;
+		}
+		for (int j=i;j<=6;++j){
+			model.addAttribute("groupMember"+i, "");
+			++i;
+		}
+		
 		return "UpdateGroupPage";
 	}
 
 	@RequestMapping(value = "/deletegroup", method = RequestMethod.GET)
-	public String deleteGroup(@RequestParam("groupId") int groupId, @RequestParam("taskId") int taskId, Model model) {
+	public String deleteGroup(@RequestParam("groupId") int groupId, @RequestParam("taskId") int taskId, Model model,HttpSession session) {
 		System.out.println("GroupController  -> deletegroup");
-
-		projectGroupService.deleteGroupOfProject(groupId);
+		
+		String path  = session.getServletContext().getRealPath("/");
+		projectGroupService.deleteGroupOfProject(groupId,path);
 
 		model.addAttribute("task_id", taskId);
 

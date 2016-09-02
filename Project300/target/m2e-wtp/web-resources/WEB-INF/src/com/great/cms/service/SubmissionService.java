@@ -8,11 +8,11 @@ public interface SubmissionService {
 	
 	public void updateSubmission(SubmissionBean submissionBean,int submissionId);
 	
-	public void updateSubmissionWithFile(SubmissionBean submissionBean,MultipartFile multipartFile,int submissionId);
+	public void updateSubmissionWithFile(SubmissionBean submissionBean,MultipartFile multipartFile,int submissionId,String path);
 	
-	public void saveSubmission(SubmissionBean submissionBean, MultipartFile multipartFile);
+	public void saveSubmission(SubmissionBean submissionBean, MultipartFile multipartFile,String path);
 	
-	public void deleteSubmission(int submissionId);
+	public void deleteSubmission(int submissionId,String path);
 	
 	public void saveSubmission(SubmissionBean submissionBean);
 	

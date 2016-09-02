@@ -20,6 +20,6 @@ public interface ProjectGroupService {
 	// Discarded
 	public void editGroupOfProject(int groupId, List<Student> studentList);
 	public void editGroup(GroupInputBean groupBean);
-	public void deleteGroupOfProject(int groupId);
+	public void deleteGroupOfProject(int groupId,String path);
 }
 

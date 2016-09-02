@@ -82,7 +82,7 @@
 		<input type="hidden" value="aaa" name="bloodGroup">
 		<input type="hidden" value="aaa" name="religion">
 		<label for="dob">DOB</label>
-		<input type="date" id="dob" name="dateOfBirth">
+		<input type="text" id="dob" placeholder="dd/mm/yyyy" name="dateOfBirth">
 		<input type="hidden" value="aaa" name="gender">
 		
 		

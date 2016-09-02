@@ -13,17 +13,21 @@ import com.great.cms.bean.GroupInputBean;
 import com.great.cms.db.dao.GroupsDao;
 import com.great.cms.db.dao.ProjectDao;
 import com.great.cms.db.dao.ProjectGroupDao;
+import com.great.cms.db.dao.ProjectGroupSubmitDao;
 import com.great.cms.db.dao.StudentDao;
 import com.great.cms.db.dao.StudentGroupDao;
 import com.great.cms.db.dao.TaskDao;
 import com.great.cms.db.entity.Groups;
 import com.great.cms.db.entity.Project;
 import com.great.cms.db.entity.ProjectGroup;
+import com.great.cms.db.entity.ProjectGroupSubmit;
 import com.great.cms.db.entity.Student;
 import com.great.cms.db.entity.StudentGroup;
 import com.great.cms.db.entity.Task;
 import com.great.cms.db.entity.TaskProject;
 import com.great.cms.service.ProjectGroupService;
+import com.great.cms.service.ProjectGroupSubmitService;
+import com.great.cms.service.SubmissionService;
 
 @Service("ProjectGroupService")
 public class ProjectGroupServiceImpl implements ProjectGroupService,Serializable{
@@ -40,6 +44,14 @@ public class ProjectGroupServiceImpl implements ProjectGroupService,Serializable
 	private StudentGroupDao studentGroupDao;
 	@Autowired
 	private ProjectDao projectDao;
+//	@Autowired
+//	private ProjectGroupSubmit projectGroupSubmit;
+	@Autowired
+	private ProjectGroupSubmitService projectGroupSubmitService;
+	@Autowired
+	private ProjectGroupSubmitDao projectGroupSubmitDao;
+	@Autowired
+	private SubmissionService submissionService;
 	
 	@Override
 	public List<GroupBean> findGroupsByProjectId(int projectId) {
@@ -180,9 +192,32 @@ public class ProjectGroupServiceImpl implements ProjectGroupService,Serializable
 	}
 
 	@Override
-	public void deleteGroupOfProject(int groupId) {
+	public void deleteGroupOfProject(int groupId,String path) {
 		ProjectGroup projectGroup = projectGroupDao.findByGroupId(groupId);
 		System.out.println("This is the project group to be deleted "+projectGroup.getGroupId());
+		
+		//this is new
+		
+		List<ProjectGroupSubmit> projectGroupSubmit = projectGroupSubmitService.findByProjectGroupId(projectGroup.getProjectGroupId());
+		for (ProjectGroupSubmit pgs : projectGroupSubmit){
+			int sid = pgs.getSubmissionId().getSubmissionId();
+			projectGroupSubmitDao.delete(pgs);
+			submissionService.deleteSubmission(sid,path);
+		}
+		
+		projectGroupDao.delete(projectGroup);
+		
+		
+		List<StudentGroup> studentGroup = studentGroupDao.findStudentByGroupId(groupId);
+		
+		for (StudentGroup sg : studentGroup){
+			studentGroupDao.delete(sg);
+		}
+		
+		
+		//ends here
+		
+		
 		groupsDao.deleteById(groupId);
 		
 	}

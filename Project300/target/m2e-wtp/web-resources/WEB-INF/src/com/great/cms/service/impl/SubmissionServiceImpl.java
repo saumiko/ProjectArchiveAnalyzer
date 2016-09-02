@@ -63,14 +63,15 @@ public class SubmissionServiceImpl implements SubmissionService,Serializable{
 //	}
 
 	@Override
-	public void deleteSubmission(int submissionId) {
+	public void deleteSubmission(int submissionId,String path) {
 		
 		if(submissionDao.findById(submissionId).getSubmissionUrl()!=null){
 			
 			
 			System.out.println("We have file to delete");
 			//Delete the file from the directory
-			fileToDelete = "F:\\Work\\Upload Repo\\" + submissionDao.findById(submissionId).getSubmissionUrl() + ".zip";
+			//fileToDelete = "Upload Repo\\" + submissionDao.findById(submissionId).getSubmissionUrl() + ".zip";
+			fileToDelete = path + submissionDao.findById(submissionId).getSubmissionUrl() + ".zip";
             f = new File(fileToDelete);
             bool = f.delete();
             
@@ -93,7 +94,7 @@ public class SubmissionServiceImpl implements SubmissionService,Serializable{
 	}
 
 	@Override
-	public void saveSubmission(SubmissionBean submissionBean, MultipartFile multipartFile) {
+	public void saveSubmission(SubmissionBean submissionBean, MultipartFile multipartFile,String path) {
 		System.out.println("add project group submit is called");
 		
 		Submission submission = new Submission();
@@ -109,9 +110,9 @@ public class SubmissionServiceImpl implements SubmissionService,Serializable{
 	    
 	    String newFileName = fileNameFromDate(submission.getSubmissionTime(), submissionBean.getGroupId());
 	    
-	    uploadDirectory = "F:\\Work\\Upload Repo\\"+ newFileName + ".zip";
-	    
-	    System.out.println("This is new file name + "+newFileName);
+	    uploadDirectory = path+newFileName + ".zip";
+	    System.out.println("this is the path "+path);
+	   
 	    
 	    if(multipartFile.getSize()>0){
 	    	try {
@@ -181,7 +182,7 @@ public class SubmissionServiceImpl implements SubmissionService,Serializable{
 	}
 
 	@Override
-	public void updateSubmissionWithFile(SubmissionBean submissionBean,MultipartFile multipartFile,int submissionId) {
+	public void updateSubmissionWithFile(SubmissionBean submissionBean,MultipartFile multipartFile,int submissionId,String path) {
 //		// TODO Auto-generated method stub
 //		
 //		
@@ -204,7 +205,7 @@ public class SubmissionServiceImpl implements SubmissionService,Serializable{
 	    
 	    String newFileName = fileNameFromDate(submission.getSubmissionTime(), submission.getSubmissionId());
 	    
-	    uploadDirectory = "F:\\Work\\Upload Repo\\"+ newFileName + ".zip";
+	    uploadDirectory = path + newFileName + ".zip";
 	    
 	    if(multipartFile.getSize()>0){
 	    	try {

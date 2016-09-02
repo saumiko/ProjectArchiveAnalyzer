@@ -56,32 +56,32 @@
   <h2>Update Project Info</h2>
   <form action="${pageContext.request.contextPath}/updategroup" method="post">
 	
-	<%int projectId = (int)session.getAttribute("projectId"); %>
+	<%String projectId = session.getAttribute("projectId").toString(); %>
 	<input type="hidden" class="form-control" id="taskId" name="taskId" value="${task_id}">
 	<input type="hidden" class="form-control" id="groupId" name="groupId" value="${groupId}">
     <div class="form-group">
       <label for="groupMember1">Member 1</label>
-      <input type="text" class="form-control" id="groupMember1" name="groupMember1" placeholder="Enter Member Roll">
+      <input type="text" class="form-control" id="groupMember1" name="groupMember1" value="${groupMember1}">
     </div>
     <div class="form-group">
       <label for="groupMember2">Member 2</label>
-      <input type="text" class="form-control" id="groupMember2" name="groupMember2" placeholder="Enter Member Roll">
+      <input type="text" class="form-control" id="groupMember2" name="groupMember2" value="${groupMember2}">
     </div>
     <div class="form-group">
       <label for="groupMember3">Member 3</label>
-      <input type="text" class="form-control" id="groupMember3" name="groupMember3" placeholder="Enter Member Roll">
+      <input type="text" class="form-control" id="groupMember3" name="groupMember3" value="${groupMember3}">
     </div>
     <div class="form-group">
       <label for="groupMember4">Member 4</label>
-      <input type="text" class="form-control" id="groupMember4" name="groupMember4" placeholder="Enter Member Roll">
+      <input type="text" class="form-control" id="groupMember4" name="groupMember4" value="${groupMember4}">
     </div>
     <div class="form-group">
       <label for="groupMember5">Member 5</label>
-      <input type="text" class="form-control" id="groupMember5" name="groupMember5" placeholder="Enter Member Roll">
+      <input type="text" class="form-control" id="groupMember5" name="groupMember5" value="${groupMember5}">
     </div>
     <div class="form-group">
       <label for="groupMember6">Member 6</label>
-      <input type="text" class="form-control" id="groupMember6" name="groupMember6" placeholder="Enter Member Roll">
+      <input type="text" class="form-control" id="groupMember6" name="groupMember6" value="${groupMember6}">
     </div>
     
     <input type="submit"></input>

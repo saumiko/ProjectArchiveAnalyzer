@@ -64,7 +64,7 @@
 			class="
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
-			<a class="navbar-brand" href="/greatweb">SUST Archives<sup>beta</sup></a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Archives<sup>beta</sup></a>
 		</div>
 		<div
 			class="
@@ -153,9 +153,11 @@
 							</a></td>
 							<td><c:out value="${projectList.getProjectDesc()}" /></td>
 							<td><a href="toUpdateProjectFormPage?task_id=${task_id}&projectId=${projectList.getProjectId()}&projectTitle=${projectList.getProjectTitle()}&projectDesc=${projectList.getProjectDesc()}" class="btn btn-info btn-sm editbutton"><i
-									class="glyphicon glyphicon-edit "></i></a> <a onclick="confirmDelete(${task_id},${projectList.getProjectId()})"
-								class="btn btn-danger btn-sm removebutton"><i
-									class="glyphicon glyphicon-remove "></i></a></td>
+									class="glyphicon glyphicon-edit "></i></a>
+<%-- 								<a onclick="confirmDelete(${task_id},${projectList.getProjectId()})" --%>
+<!-- 								class="btn btn-danger btn-sm removebutton"><i -->
+<!-- 									class="glyphicon glyphicon-remove "></i></a> -->
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

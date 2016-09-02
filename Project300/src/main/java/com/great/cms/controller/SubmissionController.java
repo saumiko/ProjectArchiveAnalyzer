@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -101,10 +102,10 @@ public class SubmissionController {
 	public @ResponseBody
 	String editSubmission(SubmissionBean submissionBean,
 			@RequestParam("file") MultipartFile multipartFile,
-			@RequestParam("submissionId") int submissionId)
+			@RequestParam("submissionId") int submissionId,HttpSession session)
 			throws FileNotFoundException {
-        		
-		submissionService.updateSubmissionWithFile(submissionBean,multipartFile,submissionId);
+		String path  = session.getServletContext().getRealPath("/");		
+		submissionService.updateSubmissionWithFile(submissionBean,multipartFile,submissionId,path);
 		return "{ \"success\" : true }";
 	}
 	
@@ -115,7 +116,7 @@ public class SubmissionController {
 	@RequestMapping(value = "/addsubmission", method = RequestMethod.POST)
 	public @ResponseBody
 	String doUpload(SubmissionBean submissionBean,
-			@RequestParam("file") MultipartFile multipartFile)
+			@RequestParam("file") MultipartFile multipartFile,HttpSession session)
 			throws FileNotFoundException {
 		
 		
@@ -124,8 +125,9 @@ public class SubmissionController {
 						+ multipartFile.getOriginalFilename() + "\nComment: "
 						+ submissionBean.getCommentTeacher());
 		System.out.println("this is the group id in do upload "+submissionBean.getGroupId());
+		String path  = session.getServletContext().getRealPath("/");
 		submissionBean.setSubmissionVer(0);
-		submissionService.saveSubmission(submissionBean, multipartFile);
+		submissionService.saveSubmission(submissionBean, multipartFile,path);
 		return "Uploaded: " + multipartFile.getSize() + " bytes";
 	}
 	
@@ -154,7 +156,7 @@ public class SubmissionController {
 	@RequestMapping(value = "/downloadfile", method = RequestMethod.GET)
 	public @ResponseBody
 	String provideDownloadable(HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+			HttpServletResponse response,HttpSession session) throws IOException {
 		System.out.println("Download file path: "
 				+ request.getParameter("filename"));
 
@@ -162,9 +164,9 @@ public class SubmissionController {
 
 		// Downloading the File
 		System.out.println("File Name: "+request.getParameter("filename"));
-
+		String path  = session.getServletContext().getRealPath("/");
 		try {
-			File file = new File("F:/Work/Upload Repo/"
+			File file = new File(path
 					+ request.getParameter("filename") + ".zip");
 			
 			
@@ -210,9 +212,9 @@ public class SubmissionController {
 
 	@RequestMapping(value = "/deletesubmission", method = RequestMethod.POST)
 	public @ResponseBody
-	String deleteSubmission(@RequestParam("submissionId") int submissionId) {
-
-		submissionService.deleteSubmission(submissionId);
+	String deleteSubmission(@RequestParam("submissionId") int submissionId,HttpSession session) {
+		String path  = session.getServletContext().getRealPath("/");
+		submissionService.deleteSubmission(submissionId,path);
 		return "{ \"success\" : true }";
 	}
 

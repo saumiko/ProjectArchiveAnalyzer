@@ -7,4 +7,5 @@ import com.great.cms.db.entity.ProjectGroupSubmit;
 public interface ProjectGroupSubmitDao extends GenericDao<ProjectGroupSubmit, Integer> {
 	
 	public List<ProjectGroupSubmit> getSubmissionByProjectGroup(int projectGroupId);
+	public List<ProjectGroupSubmit> findByProjectGroupId(int projectGroupId);
 }

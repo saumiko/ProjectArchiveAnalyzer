@@ -61,11 +61,11 @@
 	<input type="hidden" class="form-control" id="projectId" name="projectId" value="${projectId}">
     <div class="form-group">
       <label for="projectTitle">Project Title:</label>
-      <input type="text" class="form-control" id="projectTitle" name="projectTitle" placeholder="Enter Project Title">
+      <input type="text" class="form-control" id="projectTitle" name="projectTitle" value="${projectTitle}">
     </div>
     <div class="form-group">
       <label for="projectDesc">Project Description:</label>
-      <input type="text" class="form-control" id="projectDesc" name="projectDesc" placeholder="Enter Description">
+      <input type="text" class="form-control" id="projectDesc" name="projectDesc" value="${projectDesc}">
     </div>
     
     <input type="submit"></input>

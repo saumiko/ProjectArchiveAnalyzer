@@ -139,8 +139,13 @@ public class HomeController {
 		Long inst_id = teacherService.getAllTeacher();
 		System.out.println("this is inst_id "+inst_id);
 		teacher.setInstructorId(inst_id);
-		teacherService.saveTeacher(teacher);
-		return "RegistrationSuccessful";
+		try{
+			teacherService.saveTeacher(teacher);
+			return "RegistrationSuccessful";
+		}
+		catch(Exception e){
+			return "Failure";
+		}
 		
 	}
 	

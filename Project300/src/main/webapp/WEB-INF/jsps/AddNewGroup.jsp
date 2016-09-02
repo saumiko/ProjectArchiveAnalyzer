@@ -57,7 +57,7 @@
  
   <form action="${pageContext.request.contextPath}/addgroup" method="post">
 	
-	<%int projectId = (int)session.getAttribute("projectId"); %>
+	<%String projectId = session.getAttribute("projectId").toString(); %>
 	<input type="hidden" class="form-control" id="projectId" name="projectId" value="<%=projectId %>">
 	<input type="hidden" class="form-control" id="taskId" name="taskId" value="${task_id}">
     <div class="form-group">

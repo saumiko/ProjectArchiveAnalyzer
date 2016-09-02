@@ -91,6 +91,39 @@ public class LoginController {
 
 	}
 	
+	@RequestMapping(value = "/goToHomePage")
+	public String goToHomePage(Model model,HttpServletRequest request,HttpSession session) {
+
+		
+		User user = null;
+		
+		user = (User) session.getAttribute("User");
+		
+		if (user == null) {
+			model.addAttribute("message", "Invalid usrname or password");
+			return "login";
+		}
+
+		else {
+			
+            UserType Type= user.getUserTypeId();
+            
+			System.out.println("User Id: " + user.getUserId());
+			model.addAttribute("userId", user.getUserId());
+			model.addAttribute("username", user.getUserName());
+			model.addAttribute("UserRole" , user);
+			String Role=user.getUserTypeId().getUserTypeName();
+			
+				List<Course> courses = null;
+				courses = courseService.getCourseListByUserType(user);
+				model.addAttribute("courseList", courses);
+				return "stdcourse";
+		}
+
+	}
+	
+	
+	
 	@RequestMapping(value = "/sign-in.html", method = RequestMethod.GET)
 	public String logOut(Model model,HttpSession session) {
 		

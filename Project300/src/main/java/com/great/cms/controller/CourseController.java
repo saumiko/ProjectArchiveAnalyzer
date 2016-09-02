@@ -180,7 +180,7 @@ public class CourseController {
 		else{
 			System.out.println(student);
 			System.out.println("Next Course Registration Id is : "+courseRegistrationService.getNextCourseRegId());
-			Long nextId = new Long (courseRegistrationService.getNextCourseRegId());
+			Long nextId = new Long (courseRegistrationService.getNextCourseRegId()+500);
 			CourseRegistration courseRegistration = new CourseRegistration(); 
 			courseRegistration.setCourseRegId(nextId);
 			courseRegistration.setIsApproved(true);
@@ -189,7 +189,8 @@ public class CourseController {
 			courseRegistration.setMarks(0.0);
 			courseRegistration.setStudentId(student);
 			courseRegistrationService.save(courseRegistration);
-			return "TakeCourseView";
+			//return "TakeCourseView";
+			return "TakeCourseSuccess";
 		}
 		
 	}

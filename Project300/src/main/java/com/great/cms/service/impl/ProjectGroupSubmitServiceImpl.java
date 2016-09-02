@@ -59,6 +59,13 @@ public class ProjectGroupSubmitServiceImpl implements ProjectGroupSubmitService,
 		}
 		return submissionList;
 	}
+	
+	
+	public List<ProjectGroupSubmit> findByProjectGroupId(int projectGroupId){
+		List<ProjectGroupSubmit> projectGroupSubmit = null;
+		projectGroupSubmit = projGroupSubDao.findByProjectGroupId(projectGroupId);
+		return projectGroupSubmit;
+	}
 
 
 	
