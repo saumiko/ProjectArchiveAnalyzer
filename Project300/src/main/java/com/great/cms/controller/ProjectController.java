@@ -270,6 +270,7 @@ public class ProjectController {
 		int taskId = Integer.parseInt(strTaskId);
 		List<Project> projects = taskProjectService.findProjectsByTaskID(taskId);
 		model.addAttribute("projects", projects);
+		model.addAttribute("project", "ProjectView");
 		//model.addAttribute("taskId",taskId);
 		session.setAttribute("taskId", taskId);
 		String taskTitle = taskService.findTaskById(taskId).getTaskTitle();
@@ -290,6 +291,7 @@ public class ProjectController {
 		}
 		model.addAttribute("groups", groups);
 		model.addAttribute("taskId",taskId);
+		model.addAttribute("group","GroupView");
 		String taskTitle = taskService.findTaskById(taskId).getTaskTitle();
 		session.setAttribute("taskTitle", taskTitle);
 		return "GroupView";

@@ -63,7 +63,7 @@
 </nav>
 <div class="container">
 	<input type="hidden" id="hidden_username" name="username" value=${username}></input>
-	${courseSession} Session > <a href="${pageContext.request.contextPath}/publicview">Course </a>> ${courseTitle}
+	<a href="${pageContext.request.contextPath}/publicview">${courseSession}</a> > ${courseTitle} 
 	<div class="panel">
 		<table id="taskTable"
 			class="table table-striped table-bordered table-hover">

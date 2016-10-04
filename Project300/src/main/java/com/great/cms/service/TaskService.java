@@ -1,5 +1,6 @@
 package com.great.cms.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.great.cms.bean.TaskBean;
@@ -9,9 +10,9 @@ public interface TaskService {
 	
 	List<Task>getTaskList();
 	
-	void saveTask(TaskBean taskBean, int courseId);
+	void saveTask(TaskBean taskBean, int courseId,Date date);
 
-	void updateTask(TaskBean taskBean);
+	void updateTask(TaskBean taskBean,Date date);
 	
 	void deleteTask(Task task);
 	

@@ -45,7 +45,7 @@
 			class="
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
-			<a class="navbar-brand" href="/greatweb">SUST Archives<sup>beta</sup></a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Archives<sup>beta</sup></a>
 		</div>
 	</div>
 	</nav>
@@ -57,8 +57,11 @@
 	
 
      <div id="container">
+     
+     	
 		
 		<form action="checklogin" method="post">
+		
 		
 		<label for="name">Username:</label>
 		
@@ -84,6 +87,8 @@
 		
 		</form>
 		<a href="${pageContext.request.contextPath}/register">Sign Up</a>
+		<br>
+		<a href="${pageContext.request.contextPath}/publicview?session=2011">Public Page</a>
 	</div>
 	
 

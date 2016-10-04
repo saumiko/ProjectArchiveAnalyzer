@@ -103,7 +103,7 @@ $(document)
 						tempURL = addSubmissionURL;
 						$('#modal_label').html("Add Submission");
 						$('#edit_submission_group_id').val(getUrlVars()["group_id"]);
-						$('#edit_submission_date').val("");
+						//$('#edit_submission_date').val("");
 						$("#edit_submission_comment").val("");
 						//$('#edit_submission_date').val("06/01/2015 12:00:00");
 						$('#edit_submission_date').val("dd/mm/yyyy");
@@ -122,9 +122,9 @@ $(document)
 								submissionID = submissionTable
 										.cell(rowIndex, 0).data();
 								$('#modal_label').html("Edit Submission");
-								$('#edit_submission_date').val(
-										submissionTable.cell(rowIndex, 1)
-												.data());
+//								$('#edit_submission_date').val(
+//										submissionTable.cell(rowIndex, 1)
+//												.data());
 								$("#edit_submission_comment").val(
 										submissionTable.cell(rowIndex, 2)
 												.data());

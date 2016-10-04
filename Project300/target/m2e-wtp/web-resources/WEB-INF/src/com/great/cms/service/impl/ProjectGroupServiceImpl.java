@@ -107,7 +107,7 @@ public class ProjectGroupServiceImpl implements ProjectGroupService,Serializable
 	}
 	
 	@Override
-	public void addGroup(GroupInputBean groupInputBean, int projectId,Task task) {
+	public void addGroup(GroupInputBean groupInputBean, int projectId,Task task,String suf) {
 		Project project = this.projectDao.findById(projectId);
 		System.out.println("inside addGroup>>>>>>>");
 		System.out.println("Project Title "+project.getProjectTitle()+" , Project Desc "+project.getProjectDesc());
@@ -126,7 +126,7 @@ public class ProjectGroupServiceImpl implements ProjectGroupService,Serializable
 	    StringBuilder sb = new StringBuilder();
 	    for(int i=0; i<7; i++)
 	    	sb.append( (char) (random.nextInt((122-65) + 1) + 65) );
-		group.setGroupName(sb.toString());
+		group.setGroupName(sb.toString()+"("+suf+")");
 		//group.setTaskId(taskId);this was here
 		group.setTaskId(task);
 		this.groupsDao.save(group);

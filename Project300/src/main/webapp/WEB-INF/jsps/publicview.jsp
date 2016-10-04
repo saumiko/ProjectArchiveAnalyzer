@@ -118,7 +118,7 @@
 		</table>
 	</div>
 
-	<a href="<c:url value="/"/>">Index Page</a>
+	<a href="<c:url value="/sign-in.html"/>">Login Page</a>
 	</body>
 	<script>
 	$(document).ready(function(){

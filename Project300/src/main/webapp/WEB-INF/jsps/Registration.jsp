@@ -45,7 +45,7 @@
 			class="
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
-			<a class="navbar-brand" href="/greatweb">SUST Archives<sup>beta</sup></a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Archives<sup>beta</sup></a>
 		</div>
 	</div>
 	</nav>
@@ -58,7 +58,7 @@
 
      <div id="container">
 		
-		<form action="submitRegistrationForm" method="post">
+		<form action="submitRegistrationForm" method="post" onsubmit=" return validation();">
 		
 		<label for="name">Username:</label>
 		
@@ -97,4 +97,23 @@
 	
 
 </body>
+<script>
+
+function validation(){
+
+	var text1=document.getElementById('userName').value.toString();
+	var text2=document.getElementById('password').value.toString();
+	var text3=document.getElementById('userEmail').value.toString();
+	
+	if(text2=="" || text3==""||text1=="")
+		  {
+		  alert("No field should be empty");
+		return false;
+		  
+		  }
+	return true;
+
+}
+</script>
+
 </html>

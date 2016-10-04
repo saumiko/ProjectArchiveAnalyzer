@@ -47,7 +47,7 @@
 		class="
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
-		<a class="navbar-brand" href="/greatweb">SUST Archives<sup>beta</sup></a>
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Archives<sup>beta</sup></a>
 	</div>
 	<div
 		class="

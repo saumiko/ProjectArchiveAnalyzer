@@ -41,7 +41,7 @@
 			class="
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
-			<a class="navbar-brand" href="/greatweb">SUST Archives<sup>beta</sup></a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Archives<sup>beta</sup></a>
 		</div>
 	</div>
 	</nav>
@@ -55,7 +55,7 @@
 		if (user==null)
 			response.sendRedirect("Failure");
 	%>
-  <form action="${pageContext.request.contextPath}/submitNewCourse" method="post">
+  <form action="${pageContext.request.contextPath}/submitNewCourse" method="post" onsubmit=" return validation();">
 	
 	
 	
@@ -86,5 +86,26 @@
   </form>
 </div>
 </body>
+
+<script>
+
+function validation(){
+
+	var text1=document.getElementById('courseCode').value.toString();
+	var text2=document.getElementById('session').value.toString();
+	var text3=document.getElementById('semester').value.toString();
+	var text4=document.getElementById('credit').value.toString();
+	var text5=document.getElementById('courseTitle').value.toString();
+	if(text2=="" || text3==""||text1==""||text4==""||text5=="")
+		  {
+		  alert("No field should be empty");
+		return false;
+		  
+		  }
+	return true;
+
+}
+</script>
+
 
 </html>

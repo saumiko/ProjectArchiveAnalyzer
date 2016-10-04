@@ -1,6 +1,12 @@
 package com.great.cms.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,6 +27,7 @@ import com.great.cms.db.dao.UserDao;
 import com.great.cms.db.entity.Student;
 import com.great.cms.db.entity.Task;
 import com.great.cms.db.entity.User;
+import com.great.cms.service.CourseService;
 import com.great.cms.service.CourseTaskService;
 import com.great.cms.service.ExamCommitteeService;
 import com.great.cms.service.TaskService;
@@ -40,6 +47,8 @@ public class TaskController {
 	private CourseTaskService courseTaskService;
 	@Autowired
 	private ExamCommitteeService examCommitteeService;
+	@Autowired
+	private CourseService courseService;
 
 
 	JSONArray jsonArray;
@@ -107,23 +116,77 @@ public class TaskController {
 	
 	
 	@RequestMapping(value = "/edittask", method = RequestMethod.POST)
-	//public @ResponseBody
-	public 
-	String updateTask(TaskBean taskBean, BindingResult result) {
-		System.out.println("Task DeadLine "+taskBean.getTaskDeadline());
-		taskService.updateTask(taskBean);
-		//return "{ \"success\" : true }";
+	//public @ResponseBody String
+	public String 
+	updateTask( @RequestParam("taskTitle") String taskTitle,@RequestParam("taskDesc") String taskDesc,@RequestParam("deadline") String deadline,HttpSession session,Model model) {
+		TaskBean taskBean = new TaskBean();
+		System.out.println("this si taskDeadline "+deadline);
+		System.out.println("this is taskTitle "+taskTitle);
+		//taskBean.setTaskDeadline(deadline);
+		taskBean.setTaskTitle(taskTitle);
+		Task task = (Task) session.getAttribute("task");
+		taskBean.setTaskId(task.getTaskId());
+		taskBean.setTaskDesc(taskDesc);
+		taskBean.setSession(2011);
+		taskBean.setIsOpen(true);
+		taskBean.setTaskTotalGroupNo(10);
+		taskBean.setTaskTotalSubmissonNo(12);
+		taskBean.setTaskType("Project");
+		String startDateString = deadline;
+	    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss",Locale.ENGLISH); 
+	    Date startDate = null;
+	    try {
+	        startDate = df.parse(startDateString);
+	        String newDateString = df.format(startDate);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+		
+		taskService.updateTask(taskBean,startDate);
+		int courseId = (int) session.getAttribute("courseId");
+		List<Task> tasks = taskService.getTaskListByCourseId(courseId);
+		model.addAttribute("taskList", tasks);
+		model.addAttribute("course_id", courseId);
+		model.addAttribute("course_code", courseService.getCourseById(courseId));
 		return "tasks";
 
 	}
 	
 	@RequestMapping(value = "/addtask", method = RequestMethod.POST)
-	public @ResponseBody
-	String addTask(TaskBean taskBean, BindingResult result, @RequestParam("course_id") int courseId) {
-		System.out.println("TaskController.java: Calling the addTask() method");
-		//taskBean.setSession(2011);
-		taskService.saveTask(taskBean, courseId);
-		return "{ \"success\" : true }";
+	public 
+	
+	String addTask( @RequestParam("taskTitle") String taskTitle,@RequestParam("taskDesc") String taskDesc,@RequestParam("deadline") String deadline,HttpSession session,Model model){
+		TaskBean taskBean = new TaskBean();
+		System.out.println("this si taskDeadline "+deadline);
+		System.out.println("this is taskTitle "+taskTitle);
+		//taskBean.setTaskDeadline(deadline);
+		taskBean.setTaskTitle(taskTitle);
+		Task task = (Task) session.getAttribute("task");
+		//taskBean.setTaskId(task.getTaskId());
+		taskBean.setTaskDesc(taskDesc);
+		taskBean.setSession(2011);
+		taskBean.setIsOpen(true);
+		taskBean.setTaskTotalGroupNo(10);
+		taskBean.setTaskTotalSubmissonNo(12);
+		taskBean.setTaskType("Project");
+		String startDateString = deadline;
+	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss",Locale.ENGLISH); 
+	    Date startDate = null;
+	    try {
+	        startDate = df.parse(startDateString);
+	        String newDateString = df.format(startDate);
+	        System.out.println("This is converrted date "+newDateString);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    int courseId = (int) session.getAttribute("courseId");
+		taskService.saveTask(taskBean, courseId,startDate);
+		
+		List<Task> tasks = taskService.getTaskListByCourseId(courseId);
+		model.addAttribute("taskList", tasks);
+		model.addAttribute("course_id", courseId);
+		model.addAttribute("course_code", courseService.getCourseById(courseId));
+		return "tasks";
 	}
 
 	@RequestMapping(value = "/deletetask", method = RequestMethod.POST)
@@ -144,5 +207,29 @@ public class TaskController {
 		//return data;
 	}
 
+	@RequestMapping(value = "/goToUpdateTaskPage", method = RequestMethod.GET)
+	//public @ResponseBody
+	public 
+	String goToUpdateTaskPage(@RequestParam("taskId") int id,Model model,HttpSession session) {
+		System.out.println("THIS IS INSDE TASKE PAGE EDIT TASKI ID IS "+id);
+		Task task = (Task) taskService.findTaskById(id);
+		System.out.println(task);
+		System.out.println(task.getTaskDeadline());
+		session.setAttribute("task",task);
+		model.addAttribute("taskTitle",task.getTaskTitle());
+		model.addAttribute("taskDesc",task.getTaskDesc());
+		model.addAttribute("taskDeadline",task.getTaskDeadline());
+		return "UpdateTask";
+
+	}
+	
+	@RequestMapping(value = "/goToAddTaskPage")
+	//public @ResponseBody
+	public 
+	String goToAddTaskPage() {
+		
+		return "AddTaskPage";
+
+	}
 	
 }

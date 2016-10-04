@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
@@ -25,6 +28,7 @@ import com.great.cms.bean.SubmissionBean;
 import com.great.cms.db.dao.ProjectGroupDao;
 import com.great.cms.db.dao.SubmissionDao;
 import com.great.cms.db.entity.Submission;
+import com.great.cms.db.entity.Task;
 import com.great.cms.service.ProjectGroupSubmitService;
 import com.great.cms.service.SubmissionService;
 
@@ -104,7 +108,11 @@ public class SubmissionController {
 			@RequestParam("file") MultipartFile multipartFile,
 			@RequestParam("submissionId") int submissionId,HttpSession session)
 			throws FileNotFoundException {
-		String path  = session.getServletContext().getRealPath("/");		
+		String path  = session.getServletContext().getRealPath("/");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date));
+		submissionBean.setSubmissionTime(dateFormat.format(date));
 		submissionService.updateSubmissionWithFile(submissionBean,multipartFile,submissionId,path);
 		return "{ \"success\" : true }";
 	}
@@ -127,6 +135,20 @@ public class SubmissionController {
 		System.out.println("this is the group id in do upload "+submissionBean.getGroupId());
 		String path  = session.getServletContext().getRealPath("/");
 		submissionBean.setSubmissionVer(0);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date));
+		
+		
+		//newly added
+		Task task = (Task) session.getAttribute("Task");
+		Date deadLine = task.getTaskDeadline();
+		if (date.compareTo(deadLine)>0){
+			submissionBean.setSubmissionTime(dateFormat.format(date)+" (Late)");
+		}
+		//ends here
+		else
+			submissionBean.setSubmissionTime(dateFormat.format(date));
 		submissionService.saveSubmission(submissionBean, multipartFile,path);
 		return "Uploaded: " + multipartFile.getSize() + " bytes";
 	}
@@ -200,14 +222,14 @@ public class SubmissionController {
 	}
 	
 	@RequestMapping(value = "/verifysubmission", method = RequestMethod.GET)
-	public @ResponseBody
+	public
 	String verifySubmission(@RequestParam("submissionId") int submissionId) {
 
 		System.out.println("This is the submission info from verifysubmission "+submissionDao.findById(submissionId));
 		Submission submission = submissionDao.findById(submissionId);
 		submission.setSubmissionVer(1);
 		submissionDao.update(submission);
-		return "{ \"success\" : true }";
+		return "RegistrationSuccessful";
 	}
 
 	@RequestMapping(value = "/deletesubmission", method = RequestMethod.POST)

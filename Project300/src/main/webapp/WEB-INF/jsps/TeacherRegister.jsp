@@ -45,7 +45,7 @@
 			class="
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
-			<a class="navbar-brand" href="/greatweb">SUST Archives<sup>beta</sup></a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Archives<sup>beta</sup></a>
 		</div>
 	</div>
 	</nav>
@@ -60,11 +60,11 @@
 		
 		<p> Your Username for Login is ${User.getUserName()} </p>
 		
-		<form action="submitTeacherRegistrationForm" method="post">
+		<form action="submitTeacherRegistrationForm" method="post" onsubmit=" return validation();">
 		
 		<label for="name">Employee Code</label>
 		
-		<input type="name" name="employeeCode">
+		<input type="name" name="employeeCode" id="employee">
 		
 		<input type="hidden" name="isPermanent" value="1">
 		<input type="hidden" name="email" value="aaa">
@@ -97,4 +97,21 @@
 	
 
 </body>
+<script>
+
+function validation(){
+
+	var text1=document.getElementById('employee').value.toString();
+	
+	if(text1=="")
+		  {
+		  alert("No field should be empty");
+		return false;
+		  
+		  }
+	return true;
+
+}
+</script>
+
 </html>

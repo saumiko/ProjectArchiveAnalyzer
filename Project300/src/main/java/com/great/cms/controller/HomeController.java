@@ -22,6 +22,7 @@ import com.great.cms.db.entity.Department;
 import com.great.cms.db.entity.Designation;
 import com.great.cms.db.entity.Project;
 import com.great.cms.db.entity.Student;
+import com.great.cms.db.entity.Task;
 import com.great.cms.db.entity.Teacher;
 import com.great.cms.db.entity.User;
 import com.great.cms.db.entity.UserType;
@@ -152,7 +153,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public String showIndex(){
 		//System.out.println("Spring - Great Web Hello Controller!");
-		return "login";
+		return "publicview";
 	}
 	
 	@RequestMapping("/ajaxstdcourse")
@@ -170,6 +171,16 @@ public class HomeController {
 	public String showTasks(Model model, @RequestParam("course_id") int courseId,HttpSession session){
 		model.addAttribute("course_id", courseId);
 		model.addAttribute("course_code", courseService.getCourseById(courseId));
+		System.out.println("INSIDE GO TO TASKS");
+		List<Task> tasks = taskService.getTaskListByCourseId(courseId);
+		
+		for (Task t : tasks)
+			System.out.println("this is deadline "+t.getTaskDeadline());
+			
+		model.addAttribute("taskList", tasks);
+		
+//		session.setAttribute("course_id", courseId);
+//		session.setAttribute("course_code", courseService.getCourseById(courseId));
 		session.setAttribute("courseId", courseId);
 		return "tasks";
 	}
@@ -293,9 +304,18 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/submissions")
-	public String showSubmission(){
-		//System.out.println("Submission Page Mapping");
-		return "submission";
+	public String showSubmission(HttpSession session){
+		System.out.println("HMM Here it is !!!!! Submission Page Mapping");
+		
+			User user = (User)session.getAttribute("User");
+			System.out.println("this is user "+user.getUserTypeId().getUserTypeName());
+			if (user.getUserTypeId().getUserTypeName().equals("Teacher"))
+				return "submission";
+			else
+				return "submission2";	
+		
+		
+		
 	}
 	@RequestMapping("/stdsubmissions")
 	public String showstudentSubmission(){

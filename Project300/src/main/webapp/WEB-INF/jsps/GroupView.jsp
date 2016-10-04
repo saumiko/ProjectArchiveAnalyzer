@@ -63,10 +63,10 @@
 </nav>
 <div class="container">
 	<input type="hidden" id="hidden_username" name="username" value=${username}></input>
-	${courseSession} Session > <a href="${pageContext.request.contextPath}/publicview">Course </a>> ${courseTitle} > <a href="${pageContext.request.contextPath}/courseTaskViewReq?courseId=${strCourseId}">Task</a> > ${taskTitle}
+	<a href="${pageContext.request.contextPath}/publicview">${courseSession}</a> > <a href="${pageContext.request.contextPath}/courseTaskViewReq?courseId=${strCourseId}">${courseTitle}</a> > ${taskTitle}
 	<br>
 	<a href="projectViewReq?taskId=${taskId}">Project Wise View </a>/
-	<a href="projectGroupViewReq?taskId=${taskId}">Group Wise View</a>
+	<a href="projectGroupViewReq?taskId=${taskId}">Group Wise View</a> - ${group}
 	<div class="panel">
 		<table id="projectTable"
 			class="table table-striped table-bordered table-hover">

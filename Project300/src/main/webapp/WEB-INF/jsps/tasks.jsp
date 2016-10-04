@@ -36,8 +36,8 @@
 <script
 	src="<c:url value="/resources/javascript/dataTables.bootstrap.js" />"
 	type="text/javascript"></script>
-<script src="<c:url value="/resources/javascript/tasks.js" />"
-	type="text/javascript"></script>
+<%-- <script src="<c:url value="/resources/javascript/tasks.js" />" --%>
+<!-- 	type="text/javascript"></script> -->
 
 </head>
 <body>
@@ -50,7 +50,7 @@
 			class="
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
-			<a class="navbar-brand" href="/greatweb">SUST Archives<sup>beta</sup></a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Archives<sup>beta</sup></a>
 		</div>
 		<div
 			class="
@@ -72,10 +72,7 @@
 					Course: <span id="course_code">${course_code}</span>
 				</p>
 			</div>
-			<div class="col-xs-2">
-				<select id="filter_session" class="form-control">
-				</select>
-			</div>
+			
 
 
 
@@ -86,7 +83,7 @@
 			response.sendRedirect("Failure");
 	%>
 
-						<button id="button_add_task" class="btn btn-success col-xs-12">
+						<button id="button_add_task" class="btn btn-success col-xs-12" onClick="goToAddTaskPage()">
 
 							<i class="glyphicon glyphicon-plus-sign"></i> Add Task
 						</button>
@@ -102,19 +99,28 @@
 				class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th class="col-md-1 col-sm-1 col-xs-1">ID</th>
+						
+						<th class="col-md-3 col-sm-3 col-xs-3">ID</th>
+						
 						<th class="col-md-3 col-sm-3 col-xs-3">Title</th>
-						<th class="col-md-2 col-sm-2 col-xs-2">Type</th>
-						<th class="col-md-2 col-sm-2 col-xs-2">Details</th>
+						<th class="col-md-3 col-sm-3 col-xs-3">Desc</th>
 						<th class="col-md-1 col-sm-1 col-xs-1">Deadline</th>
-						<th class="col-md-1 col-sm-1 col-xs-1">Submission open</th>
-						<th class="col-md-1 col-sm-1 col-xs-1">Total No. Of Groups</th>
-
-						<th class="col-md-1 col-sm-1 col-xs-1">Total Submission</th>
 						<th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
+				<c:forEach items="${taskList}" var="taskList">
+						<tr>
+							<td><c:out value="${taskList.getTaskId()}" /></td>
+							<td><a href="${pageContext.request.contextPath}/projectgroups?task_id=${taskList.getTaskId()}"> <c:out
+										value="${taskList.getTaskTitle()}" /></a></td>
+							<td><c:out value="${taskList.getTaskDesc()}" /></td>			
+							<td><c:out value="${taskList.getTaskDeadline()}" /></td>
+							<td><a class="btn btn-info btn-sm editbutton" onclick="goToUpdateTaskPage(${taskList.getTaskId()})"><i
+									class="glyphicon glyphicon-edit "></i></a>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -347,4 +353,18 @@
 	</div>
 	<!-- body container -->
 </body>
+
+<script>
+$(document).ready(function(){
+    $('#taskTable').DataTable();
+});
+function goToUpdateTaskPage(taskId){
+	alert("whoops!!!!");
+	window.location.href = "goToUpdateTaskPage?taskId="+taskId;
+}
+function goToAddTaskPage(){
+	alert("whoops!!!!");
+	window.location.href = "goToAddTaskPage";
+}
+</script>
 </html>

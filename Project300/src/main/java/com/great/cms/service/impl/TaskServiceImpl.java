@@ -1,6 +1,7 @@
 package com.great.cms.service.impl;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class TaskServiceImpl implements TaskService,Serializable {
 
 	
 	@Override
-	public void saveTask(TaskBean taskBean, int courseId) {
+	public void saveTask(TaskBean taskBean, int courseId,Date date) {
 		// TODO Auto-generated method stub
 		ExamCommittee examCommittee = new ExamCommittee();
 		TaskType tt = this.taskTypeDao.findById(taskBean.getTaskTypeId());		
@@ -51,7 +52,7 @@ public class TaskServiceImpl implements TaskService,Serializable {
 		
 		task.setTaskTitle(taskBean.getTaskTitle());
 		task.setTaskDesc(taskBean.getTaskDesc());
-		task.setTaskDeadline(taskBean.getTaskDeadlineToDate());
+		task.setTaskDeadline(date);
 		task.setTaskTotalGroupNo(taskBean.getTaskTotalGroupNo());
 		task.setTaskTotalSubmissonNo(taskBean.getTaskTotalSubmissonNo());
 		task.setIsOpen(taskBean.getIsOpen());
@@ -68,20 +69,21 @@ public class TaskServiceImpl implements TaskService,Serializable {
 	}
 
 	@Override
-	public void updateTask(TaskBean taskBean) {
+	public void updateTask(TaskBean taskBean,Date date) {
 		// TODO Auto-generated method stub
 		Task task = this.taskDao.findById(taskBean.getTaskId());
 		task.setTaskTitle(taskBean.getTaskTitle());
 		task.setTaskDesc(taskBean.getTaskDesc());
-		task.setTaskDeadline(taskBean.getTaskDeadlineToDate());
+		//task.setTaskDeadline(taskBean.getTaskDeadlineToDate());
+		task.setTaskDeadline(date);
 		task.setTaskTotalGroupNo(taskBean.getTaskTotalGroupNo());
 		task.setTaskTotalSubmissonNo(taskBean.getTaskTotalSubmissonNo());
 		task.setIsOpen(taskBean.getIsOpen());
 		this.taskDao.update(task);
 		System.out.println("TaskBean session: " + taskBean.getSession());
-		CourseTask courseTask = task.getCourseTask();
-		courseTask.setExamCommitteeId(this.examCommitteeDao.findBySession(taskBean.getSession()));
-		this.courseTaskDao.update(courseTask);
+//		CourseTask courseTask = task.getCourseTask();
+//		courseTask.setExamCommitteeId(this.examCommitteeDao.findBySession(taskBean.getSession()));
+//		this.courseTaskDao.update(courseTask);
 	}
 
 	@Override

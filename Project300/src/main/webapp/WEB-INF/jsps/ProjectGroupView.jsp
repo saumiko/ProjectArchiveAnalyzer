@@ -63,7 +63,7 @@
 </nav>
 <div class="container">
 	<input type="hidden" id="hidden_username" name="username" value=${username}></input>
-	${courseSession} Session > <a href="${pageContext.request.contextPath}/publicview">Course </a>> ${courseTitle} > <a href="${pageContext.request.contextPath}/courseTaskViewReq?courseId=${strCourseId}">Task</a> > ${taskTitle} > <a href="${pageContext.request.contextPath}/projectViewReq?taskId=${taskId}">Project</a> > ${projectTitle}  
+	<a href="${pageContext.request.contextPath}/publicview">${courseSession}</a> > <a href="${pageContext.request.contextPath}/courseTaskViewReq?courseId=${strCourseId}">${courseTitle}</a> > <a href="${pageContext.request.contextPath}/projectViewReq?taskId=${taskId}">${taskTitle}</a> > ${projectTitle}  
 	<br>
 	<br>
 	<br>

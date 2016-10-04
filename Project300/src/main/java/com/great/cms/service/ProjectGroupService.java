@@ -16,7 +16,7 @@ public interface ProjectGroupService {
 	public String findProjectTitleByGroupId(int groupId);
 	// Discarded
 	public void addGroupOfProject(int projectId, String groupName, List<Student>studentList,int taskId);
-	public void addGroup(GroupInputBean groupInputBean, int projectId,Task task);
+	public void addGroup(GroupInputBean groupInputBean, int projectId,Task task,String suf);
 	// Discarded
 	public void editGroupOfProject(int groupId, List<Student> studentList);
 	public void editGroup(GroupInputBean groupBean);

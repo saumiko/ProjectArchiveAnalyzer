@@ -45,7 +45,7 @@
 			class="
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
-			<a class="navbar-brand" href="/greatweb">SUST Archives<sup>beta</sup></a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Archives<sup>beta</sup></a>
 		</div>
 	</div>
 	</nav>
@@ -60,7 +60,7 @@
      
      	<p> Your Username for Login is ${User.getUserName()} </p>
 		
-		<form action="submitStudentRegistrationForm" method="post">
+		<form action="submitStudentRegistrationForm" method="post" onsubmit=" return validation();">
 		
 		<label for="firstname">First Name:</label>
 		
@@ -81,8 +81,8 @@
 		<input type="hidden" value="aaa" name="maritalStatus">
 		<input type="hidden" value="aaa" name="bloodGroup">
 		<input type="hidden" value="aaa" name="religion">
-		<label for="dob">DOB</label>
-		<input type="text" id="dob" placeholder="dd/mm/yyyy" name="dateOfBirth">
+<!-- 		<label for="dob">DOB</label> -->
+<!-- 		<input type="text" id="dob" placeholder="dd/mm/yyyy" name="dateOfBirth"> -->
 		<input type="hidden" value="aaa" name="gender">
 		
 		
@@ -104,4 +104,23 @@
 	
 
 </body>
+<script>
+
+function validation(){
+
+	var text1=document.getElementById('lastname').value.toString();
+	var text2=document.getElementById('firstname').value.toString();
+	var text3=document.getElementById('reg').value.toString();
+	
+	if(text2=="" || text3==""||text1=="")
+		  {
+		  alert("No field should be empty");
+		return false;
+		  
+		  }
+	return true;
+
+}
+</script>
+
 </html>

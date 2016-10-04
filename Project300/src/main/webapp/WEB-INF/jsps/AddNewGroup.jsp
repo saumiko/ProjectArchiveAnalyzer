@@ -41,7 +41,7 @@
 			class="
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
-			<a class="navbar-brand" href="/greatweb">SUST Archives<sup>beta</sup></a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Archives<sup>beta</sup></a>
 		</div>
 	</div>
 	</nav>
@@ -60,6 +60,10 @@
 	<%String projectId = session.getAttribute("projectId").toString(); %>
 	<input type="hidden" class="form-control" id="projectId" name="projectId" value="<%=projectId %>">
 	<input type="hidden" class="form-control" id="taskId" name="taskId" value="${task_id}">
+	<div class="form-group">
+      <label for="ProjectSubTask">ProjectSubTask</label>
+      <input type="text" class="form-control" id="ProjectSubTask" name="ProjectSubTask" placeholder="Enter Sub Task">
+    </div>
     <div class="form-group">
       <label for="groupMember1">Member 1</label>
       <input type="text" class="form-control" id="groupMember1" name="groupMember1" placeholder="Enter Member Roll">

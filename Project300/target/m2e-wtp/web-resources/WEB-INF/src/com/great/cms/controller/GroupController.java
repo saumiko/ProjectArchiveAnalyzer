@@ -132,7 +132,7 @@ public class GroupController {
 
 	@RequestMapping(value = "/addgroup", method = RequestMethod.POST)
 	public String addGroup(GroupInputBean groupInputBean, @RequestParam("projectId") int projectId,
-			@RequestParam("taskId") int taskId, Model model,HttpSession session) {
+			@RequestParam("taskId") int taskId, @RequestParam("ProjectSubTask") String suf,Model model,HttpSession session) {
 		System.out.println("ProjectGroupController  -> addgroup");
 		model.addAttribute("task_id", taskId);
 
@@ -163,7 +163,7 @@ public class GroupController {
 		
 		//ends here
 		
-		projectGroupService.addGroup(groupInputBean, projectId,task);
+		projectGroupService.addGroup(groupInputBean, projectId,task,suf);
 		return "project-groups";
 
 	}
