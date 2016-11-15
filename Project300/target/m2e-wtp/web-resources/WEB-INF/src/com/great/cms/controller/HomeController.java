@@ -195,13 +195,13 @@ public class HomeController {
 
 	@RequestMapping(value="/projectgroups")
 	public String showProjectGroup(Model model, @RequestParam("task_id")int taskId,@RequestParam(value="project_id",required=false)Integer projectid,HttpSession session){
-		System.out.println("Project Group  Page Mapping");
+		System.out.println("Project Group  Page Mapping"+projectid);
 		session.setAttribute("projectId", projectid);
 		
 		//newly added from here
 		
 		session.setAttribute("Task", taskService.findTaskById(taskId));
-		
+		session.setAttribute("taskDeadline",taskService.findTaskById(taskId).getTaskDeadline());
 		//ends here
 		
 		
@@ -229,6 +229,12 @@ public class HomeController {
 				allMemberString+=(str+" ");
 			}
 			gr.setMemberString(allMemberString);
+			if (gr.getGroupName().endsWith(")")){
+				int lastIndex = gr.getGroupName().lastIndexOf('(');
+				int lastIndex2 = gr.getGroupName().length();
+				gr.setGroupName(gr.getGroupName().substring(lastIndex+1, lastIndex2-1));
+			}
+				
 		}	
 		model.addAttribute("groupList", groupList);
 		return "project-groups";
@@ -247,6 +253,7 @@ public class HomeController {
 	public String showstdProjectGroup(Model model, @RequestParam("task_id")int taskId,HttpSession session){
 		System.out.println("student Project Group  Page Mapping");
 		
+		session.setAttribute("Task", taskService.findTaskById(taskId));
 		//from here 
 		
 		model.addAttribute("task_id", taskId);
@@ -276,6 +283,11 @@ public class HomeController {
 			int breakFlag = 0;
 			
 			for (GroupBean gr : groupList){
+				if (gr.getGroupName().endsWith(")")){
+					int lastIndex = gr.getGroupName().lastIndexOf('(');
+					int lastIndex2 = gr.getGroupName().length();
+					gr.setGroupName(gr.getGroupName().substring(lastIndex+1, lastIndex2-1));
+				}
 				String allMemberString = " ";
 				ArrayList<String> groupMemberList2 = gr.getMemberList();
 				for (String str : groupMemberList2){
@@ -299,7 +311,7 @@ public class HomeController {
 		}
 		model.addAttribute("projectList", finalProjectList);
 		model.addAttribute("groupList", finalGroupList);
-		
+		session.setAttribute("taskDeadline",taskService.findTaskById(taskId).getTaskDeadline());
 		return "student-project-groups";
 	}
 	

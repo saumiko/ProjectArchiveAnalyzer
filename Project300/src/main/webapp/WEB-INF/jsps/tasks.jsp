@@ -359,11 +359,11 @@ $(document).ready(function(){
     $('#taskTable').DataTable();
 });
 function goToUpdateTaskPage(taskId){
-	alert("whoops!!!!");
+	//alert("whoops!!!!");
 	window.location.href = "goToUpdateTaskPage?taskId="+taskId;
 }
 function goToAddTaskPage(){
-	alert("whoops!!!!");
+	//alert("whoops!!!!");
 	window.location.href = "goToAddTaskPage";
 }
 </script>

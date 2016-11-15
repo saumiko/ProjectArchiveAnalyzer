@@ -177,11 +177,11 @@
 							<i class="glyphicon glyphicon-plus-sign"></i> Add Groups
 						</button>
 					</c:when>
-					<c:otherwise>
+					<c:when test="${not empty projectId}">
 						<button id="button_add_project" class="btn btn-success" onclick="goToAddGroupFormPage(${task_id})">
 							<i class="glyphicon glyphicon-plus-sign"></i> Add Groups
 						</button>
-					</c:otherwise>
+					</c:when>
 				</c:choose>
 
 			</div>
@@ -475,16 +475,22 @@ function goToAddProjectForm(task_id){
 	window.location.href = "${pageContext.request.contextPath}/addproject2?task_id="+task_id;
 }
 function goToAddGroupFormPage(task_id){
-	alert("whoops!!!!");
+	//alert("whoops!!!!");
 	window.location.href = "${pageContext.request.contextPath}/goToAddGroupFormPage?task_id="+task_id;
 }
 function goToUpdateGroupPage(groupId,taskId){
-	alert("whoops!!!!");
+	//alert("whoops!!!!");
 	window.location.href = "${pageContext.request.contextPath}/gotoupdategroupformpage?groupId="+groupId+"&taskId="+taskId;
 }
 function goDeleteGroup(groupId,taskId){
-	alert("whoops!!!!");
-	window.location.href = "${pageContext.request.contextPath}/deletegroup?groupId="+groupId+"&taskId="+taskId;
+	//alert("whoops!!!!");
+	var r = confirm("Confirm Delete?");
+	if (r == true) {
+		window.location.href = "${pageContext.request.contextPath}/deletegroup?groupId="+groupId+"&taskId="+taskId;
+	} else {
+    	
+	}
+	
 }
 </script>
 </html>

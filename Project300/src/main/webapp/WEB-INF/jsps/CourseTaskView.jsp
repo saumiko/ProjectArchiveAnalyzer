@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<% response.setHeader("Cache-Control","no-cache"); 
-/*HTTP 1.1*/ response.setHeader("Pragma","no-cache"); 
-/*HTTP 1.0*/ response.setDateHeader ("Expires", 0);
-%> 
+<%
+	response.setHeader("Cache-Control", "no-cache");
+	/*HTTP 1.1*/ response.setHeader("Pragma", "no-cache");
+	/*HTTP 1.0*/ response.setDateHeader("Expires", 0);
+%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -40,55 +41,67 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-<div class="row topbar">
-	<!-- Brand and toggle get grouped for better mobile display -->
-	<div
-		class="
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="row topbar">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div
+			class="
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
-		<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Archives<sup>beta</sup></a>
-	</div>
-	<div
-		class="
+			<a class="navbar-brand"
+				href="${pageContext.request.contextPath}/sign-in.html">SUST
+				Archives<sup>beta</sup>
+			</a>
+		</div>
+		<div
+			class="
                  col-sm-5 col-sm-offset-1
                  col-xs-12">
-		<ul class="nav navbar-nav navbar-right">
-<%-- 			<li><a href="#">${UserRole.getUserName()}</a></li> --%>
-<!-- 			<li><a href="#">Settings</a></li> -->
-<!-- 			<li><a href="sign-in.html">Log Out</a></li> -->
-		</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<%-- 			<li><a href="#">${UserRole.getUserName()}</a></li> --%>
+				<!-- 			<li><a href="#">Settings</a></li> -->
+				<!-- 			<li><a href="sign-in.html">Log Out</a></li> -->
+			</ul>
+		</div>
 	</div>
-</div>
-</nav>
-<div class="container">
-	<input type="hidden" id="hidden_username" name="username" value=${username}></input>
-	<a href="${pageContext.request.contextPath}/publicview">${courseSession}</a> > ${courseTitle} 
-	<div class="panel">
-		<table id="taskTable"
-			class="table table-striped table-bordered table-hover">
-			<thead>
-				<tr>
-					<th class="col-md-1 col-sm-1 col-xs-1">Task ID</th>
-					<th class="col-md-2 col-sm-2 col-xs-2">Task Title</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${tasks}" var="tasks">
-        <tr>
-            <td> <c:out value="${tasks.getTaskId()}"/></a></td>
-            <td> <a href="${pageContext.request.contextPath}/projectViewReq?taskId=${tasks.getTaskId()}"> <c:out value="${tasks.getTaskTitle()}"/></td>
-        </tr>
-    </c:forEach>
-			</tbody>
-		</table>
-	</div>
-
-	
-	</body>
-	<script>
-	$(document).ready(function(){
-	    $('#taskTable').DataTable();
+	</nav>
+	<div class="container">
+		<input type="hidden" id="hidden_username" name="username"
+			value=${username}></input> <a
+			href="${pageContext.request.contextPath}/publicview">${courseSession}</a>
+		> ${courseTitle}
+		<div class="row searchbar">
+		<div class="col-xs-8">
+			<p class="table-headertext">
+				Course: <span id="course_code">${courseTitle}</span>
+			</p>
+		</div>
+		</div>
+		<div class="panel">
+			<table id="taskTable"
+				class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th class="col-md-1 col-sm-1 col-xs-1">Task ID</th>
+						<th class="col-md-2 col-sm-2 col-xs-2">Task Title</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${tasks}" var="tasks">
+						<tr>
+							<td><c:out value="${tasks.getTaskId()}" /></a></td>
+							<td><a
+								href="${pageContext.request.contextPath}/projectViewReq?taskId=${tasks.getTaskId()}">
+									<c:out value="${tasks.getTaskTitle()}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+</body>
+<script>
+	$(document).ready(function() {
+		$('#taskTable').DataTable();
 	});
-	</script>
+</script>
 </html>

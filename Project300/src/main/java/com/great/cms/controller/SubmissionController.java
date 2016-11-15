@@ -56,7 +56,7 @@ public class SubmissionController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET, value = "/ajaxsubmissions")
 	public @ResponseBody
-	String getSubmissionList(Model model, @RequestParam("group_id") int groupId) {
+	String getSubmissionList(Model model, @RequestParam("group_id") int groupId,HttpSession session) {
 		System.out.println("Group Id: "+groupId);
 		List<Submission> submissionList = null;
 
@@ -68,20 +68,34 @@ public class SubmissionController {
 		if (submissionList == null)
 			System.out
 					.println("Hellllo Submission Controller -> getSubmissionList : LIST IS NULL");
+	
+		Date deadLine = (Date)session.getAttribute("taskDeadline");
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+		
+		try {
+			for (Submission s : submissionList) {
+				JSONArray jsonObj = new JSONArray();
+				jsonObj.add(s.getSubmissionId().toString());
+				System.out.println("thi is the sub time: "+s.getSubmissionTime());
+				Date subTimeInDate = df.parse(s.getSubmissionTime());
+				if(subTimeInDate.after(deadLine))
+					jsonObj.add(s.getSubmissionTime()+" (Late)");
+				else
+					jsonObj.add(s.getSubmissionTime());
+				//submissionDate = s.getSubmissionDeadline());
+				jsonObj.add(s.getCommentTeacher());
+				jsonObj.add(s.getSubmissionUrl());
+				/*
+				 * if( s.getTaskTypeId().getTaskTypeId()==1) jsonObj.add("Project");
+				 * else jsonObj.add("Assignment");
+				 */
 
-		for (Submission s : submissionList) {
-			JSONArray jsonObj = new JSONArray();
-			jsonObj.add(s.getSubmissionId().toString());
-			jsonObj.add(s.getSubmissionTime());
-			jsonObj.add(s.getCommentTeacher());
-			jsonObj.add(s.getSubmissionUrl());
-			/*
-			 * if( s.getTaskTypeId().getTaskTypeId()==1) jsonObj.add("Project");
-			 * else jsonObj.add("Assignment");
-			 */
-
-			jsonArray.add(jsonObj);
+				jsonArray.add(jsonObj);
+			}
+		} catch (Exception e) {
+			System.out.println("Exception EXception!!!");
 		}
+		
 
 		JSONObject parameters = new JSONObject();
 
@@ -134,6 +148,7 @@ public class SubmissionController {
 						+ submissionBean.getCommentTeacher());
 		System.out.println("this is the group id in do upload "+submissionBean.getGroupId());
 		String path  = session.getServletContext().getRealPath("/");
+		//String path  = "F://Work//Upload Repo//";
 		submissionBean.setSubmissionVer(0);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
@@ -143,11 +158,12 @@ public class SubmissionController {
 		//newly added
 		Task task = (Task) session.getAttribute("Task");
 		Date deadLine = task.getTaskDeadline();
-		if (date.compareTo(deadLine)>0){
-			submissionBean.setSubmissionTime(dateFormat.format(date)+" (Late)");
-		}
-		//ends here
-		else
+		System.out.println("this is the deadline"+dateFormat.format(deadLine));
+//		if (date.compareTo(deadLine)>0){
+//			submissionBean.setSubmissionTime(dateFormat.format(date)+" (Late)");
+//		}
+//		//ends here
+//		else
 			submissionBean.setSubmissionTime(dateFormat.format(date));
 		submissionService.saveSubmission(submissionBean, multipartFile,path);
 		return "Uploaded: " + multipartFile.getSize() + " bytes";

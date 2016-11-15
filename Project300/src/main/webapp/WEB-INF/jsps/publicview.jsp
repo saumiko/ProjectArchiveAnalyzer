@@ -55,7 +55,7 @@
 		<ul class="nav navbar-nav navbar-right">
 <%-- 			<li><a href="#">${UserRole.getUserName()}</a></li> --%>
 <!-- 			<li><a href="#">Settings</a></li> -->
-<!-- 			<li><a href="sign-in.html">Log Out</a></li> -->
+<li><a href="<c:url value="/sign-in.html"/>">Login Page</a></li>
 		</ul>
 	</div>
 </div>
@@ -118,7 +118,7 @@
 		</table>
 	</div>
 
-	<a href="<c:url value="/sign-in.html"/>">Login Page</a>
+	
 	</body>
 	<script>
 	$(document).ready(function(){

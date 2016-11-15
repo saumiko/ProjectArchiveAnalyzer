@@ -68,7 +68,13 @@
 	<br>
 	<br>
 	<br>
-	
+	<div class="row searchbar">
+		<div class="col-xs-8">
+			<p class="table-headertext">
+				Group: <span id="course_code">${groupName}</span>
+			</p>
+		</div>
+	</div>
 	
 	
 	

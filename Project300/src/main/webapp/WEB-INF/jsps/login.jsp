@@ -47,6 +47,14 @@
                  col-xs-12">
 			<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Archives<sup>beta</sup></a>
 		</div>
+		<div
+		class="
+                 col-sm-5 col-sm-offset-1
+                 col-xs-12">
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="${pageContext.request.contextPath}/publicview?session=2011">Public Page</a></li>
+		</ul>
+	</div>
 	</div>
 	</nav>
 	</div>
@@ -88,7 +96,7 @@
 		</form>
 		<a href="${pageContext.request.contextPath}/register">Sign Up</a>
 		<br>
-		<a href="${pageContext.request.contextPath}/publicview?session=2011">Public Page</a>
+		
 	</div>
 	
 

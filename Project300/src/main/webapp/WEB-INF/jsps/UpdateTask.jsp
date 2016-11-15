@@ -48,7 +48,7 @@
 	</div>
 	</nav>
 	<div class="container">
-  <h2>Add A Course</h2>
+  <h2>Update Task</h2>
   
   <% 
 		User user = (User) session.getAttribute("User");

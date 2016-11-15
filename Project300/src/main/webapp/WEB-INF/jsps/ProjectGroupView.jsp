@@ -63,10 +63,17 @@
 </nav>
 <div class="container">
 	<input type="hidden" id="hidden_username" name="username" value=${username}></input>
-	<a href="${pageContext.request.contextPath}/publicview">${courseSession}</a> > <a href="${pageContext.request.contextPath}/courseTaskViewReq?courseId=${strCourseId}">${courseTitle}</a> > <a href="${pageContext.request.contextPath}/projectViewReq?taskId=${taskId}">${taskTitle}</a> > ${projectTitle}  
+	<a href="${pageContext.request.contextPath}/publicview">${courseSession}</a> > <a href="${pageContext.request.contextPath}/courseTaskViewReq?courseId=${strCourseId}">${courseTitle}</a> > <a href="${pageContext.request.contextPath}/projectViewReq?taskId=${taskId}">${taskTitle}</a> > ${projectTitle}
 	<br>
 	<br>
-	<br>
+	<div class="row searchbar">
+		<div class="col-xs-8">
+			<p class="table-headertext">
+				Project: <span id="course_code">${projectTitle}</span>
+			</p>
+		</div>
+	</div>
+	
 	<div class="panel">
 		<table id="projectTable"
 			class="table table-striped table-bordered table-hover">

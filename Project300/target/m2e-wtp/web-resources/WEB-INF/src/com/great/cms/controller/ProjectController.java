@@ -268,12 +268,14 @@ public class ProjectController {
 	@RequestMapping(value="/projectViewReq",method=RequestMethod.GET)
 	public String tester2(Model model,HttpSession session,@RequestParam(value="taskId",required=false) String strTaskId){
 		int taskId = Integer.parseInt(strTaskId);
+		System.out.println("inside project View Req");
 		List<Project> projects = taskProjectService.findProjectsByTaskID(taskId);
 		model.addAttribute("projects", projects);
 		model.addAttribute("project", "ProjectView");
 		//model.addAttribute("taskId",taskId);
 		session.setAttribute("taskId", taskId);
 		String taskTitle = taskService.findTaskById(taskId).getTaskTitle();
+		session.setAttribute("taskDeadline",taskService.findTaskById(taskId).getTaskDeadline());
 		session.setAttribute("taskTitle", taskTitle);
 		return "ProjectView";
 	}
@@ -301,6 +303,13 @@ public class ProjectController {
 	public String tester4(Model model,HttpSession session,@RequestParam(value="projectId") String strProjectId,@RequestParam(value="projectTitle") String projectTitle){
 		int projectId = Integer.parseInt(strProjectId);
 		List<GroupBean> projectGroup = projectGroupService.findGroupsByProjectId(projectId);
+		for (GroupBean gr : projectGroup){
+			if (gr.getGroupName().endsWith(")")){
+				int lastIndex = gr.getGroupName().lastIndexOf('(');
+				int lastIndex2 = gr.getGroupName().length();
+				gr.setGroupName(gr.getGroupName().substring(lastIndex+1, lastIndex2-1));
+			}
+		}
 		model.addAttribute("projectGroup", projectGroup);
 		//model.addAttribute("projectTitle",projectTitle);
 		session.setAttribute("projectTitle",projectTitle);
@@ -321,6 +330,8 @@ public class ProjectController {
 		
 		for(Submission sbm : submissions)
 			System.out.println("this is submission ver "+sbm.getSubmissionVer());
+		
+		
 		
 		int count = 0;
 		for (Submission sbm : submissions){

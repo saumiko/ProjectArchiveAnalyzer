@@ -63,10 +63,24 @@
 </nav>
 <div class="container">
 	<input type="hidden" id="hidden_username" name="username" value=${username}></input>
-	<a href="${pageContext.request.contextPath}/publicview">${courseSession}</a> > <a href="${pageContext.request.contextPath}/courseTaskViewReq?courseId=${strCourseId}">${courseTitle}</a> > ${taskTitle}
-	<br>
-	<a href="projectViewReq?taskId=${taskId}">Project Wise View </a>/
-	<a href="projectGroupViewReq?taskId=${taskId}">Group Wise View</a> - ${group}
+	
+	<div class="row searchbar">
+		<div class="col-xs-8">
+			<a href="${pageContext.request.contextPath}/publicview">${courseSession}</a> > <a href="${pageContext.request.contextPath}/courseTaskViewReq?courseId=${strCourseId}">${courseTitle}</a> > ${taskTitle}
+		</div>
+		<div class="col-xs-4">
+			<a href="projectViewReq?taskId=${taskId}">Project Wise View </a>/
+			<a href="projectGroupViewReq?taskId=${taskId}">Group Wise View</a> - ${group}
+		</div>
+	</div>
+	
+	<div class="row searchbar">
+		<div class="col-xs-8">
+			<p class="table-headertext">
+				Task: <span id="course_code">${taskTitle}</span>
+			</p>
+		</div>
+	</div>
 	<div class="panel">
 		<table id="projectTable"
 			class="table table-striped table-bordered table-hover">

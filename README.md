@@ -1,4 +1,16 @@
-# ProjectArchiveAnalyzer
-We don’t have any project archive in our department. Most of the students complete their projects and after the submission sometimes they get into the trash folder or is being stored in the student’s local storage. So that if someone in the next years want to do a similar type of project s/he has to start it from the scratch rather than developing the already developed previous work. So we are going to introduce this thing in the department where each and every projects will be sorted out by their types and with proper descriptions and setup &amp; user manuals. We’ll be making a keyword searching system for better accessibility to the projects people are looking for. The key thing will be the review system for each and every project. We’ll build a automated system using machine learning algorithms which will determine the project strength by the reviews from the project organizer &amp; other people who will be seeing it online. When the project will be uploaded the user will have to provide a precise description of the project and we’ll use the project review to determine his profile strength also by using machine learning algorithms. So these will be our key objectives for this project.
+# SUST Archives (beta)
+This project was created to keep track of the project and assignment submissions of the students at SUST. Student will take a course, teacher will approve him and then will assign him his group and his project. Student will be able to submit his tasks accordingly. 
 
-#This project will be developed as our academic project 300 
+This project was build using Spring framework. To control the dependencies we have used Maven.
+
+### How to build and run
+- Download and install [Spring Tool Suite™](https://spring.io/tools).
+- Import the `Project300` folder as existing maven project in your STS.
+- Install [mysql](http://dev.mysql.com/downloads/mysql/) in your system.
+- Open the [Configuration file](https://github.com/saumiko/sustarchive/blob/master/Project300/src/main/resources/conf.properties) of the project and enter your root password at `line 21`.
+- Import the [Schema Creator](https://github.com/saumiko/sustarchive/blob/master/Project300/sust_archive_schema_creator_1.0.sql) and [Populator](https://github.com/saumiko/sustarchive/blob/master/Project300/sust_archive_dummy_populator_2.0.sql) to your `mysql` local instance.
+- Go back to `STS` and run the project on your installed server. 
+
+You're good to go and explore.
+
+© :bangladesh: Shahjalal University of Science and Technology, 2016
