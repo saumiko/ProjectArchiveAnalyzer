@@ -1,6 +1,8 @@
 # SUST Archives (beta)
 This project was created to keep track of the project and assignment submissions of the students at SUST. Student will take a course, teacher will approve him and then will assign him his group and his project. Student will be able to submit his tasks accordingly. 
 
+The project demonstration keynote can be seen in [YouTube](https://www.youtube.com/watch?v=ycyANyEoOLo).
+
 This project was build using Spring framework. To control the dependencies we have used Maven.
 
 ### How to build and run
