@@ -1,7 +1,7 @@
 # SUST Archives (beta)
 This project was created to keep track of the project and assignment submissions of the students at SUST. Student will take a course, teacher will approve him and then will assign him his group and his project. Student will be able to submit his tasks accordingly. 
 
-The project demonstration keynote can be seen in [YouTube](https://www.youtube.com/watch?v=c9nCWfFTYaA). To view it in web [click here](https://sustarchive.github.io). You can also download it from [here](https://github.com/saumiko/sustarchive/blob/master/SUSTArchive.key).
+The project demonstration keynote can be seen in [YouTube](https://www.youtube.com/watch?v=c9nCWfFTYaA). To view it in web [click here](https://sustarchive.github.io). You can also download it from [here](https://github.com/saumiko/sustarchive/blob/master/SUSTArchive%20.key).
 
 This project was build using Spring framework. To control the dependencies we have used Maven.
 
